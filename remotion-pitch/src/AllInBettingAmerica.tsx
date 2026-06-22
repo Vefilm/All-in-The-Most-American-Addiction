@@ -31,7 +31,7 @@ import {RED} from './lib/tokens';
 export const AllInBettingAmerica: React.FC = () => {
   return (
     <>
-      <Audio src={staticFile('the-hearing.mp3')} volume={0.75} />
+      <Audio src={staticFile('the-hearing-extended.mp3')} volume={0.75} />
       <Series>
 
         {/* 1. TITLE — 90 frames (3s) */}
