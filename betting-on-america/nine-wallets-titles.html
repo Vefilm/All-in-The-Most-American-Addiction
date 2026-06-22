@@ -63,8 +63,11 @@ html,body{width:100%;height:100%;background:#040403;overflow:hidden;}
   <!-- ALERT WASH (during wallet visits) -->
   <div id="alert-pulse" style="position:absolute;inset:0;pointer-events:none;z-index:3;opacity:0;animation:alertpls 1.2s ease-in-out infinite;"></div>
 
+  <!-- READABILITY OVERLAY — fades in as camera moves to hub so title text is clean -->
+  <div id="read-overlay" style="position:absolute;inset:0;background:#030202;opacity:0;pointer-events:none;z-index:4;"></div>
+
   <!-- FLASH -->
-  <div id="flash" style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(177,18,38,.9),rgba(100,10,20,.2) 55%,transparent 74%);opacity:0;mix-blend-mode:screen;pointer-events:none;z-index:3;"></div>
+  <div id="flash" style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(177,18,38,.9),rgba(100,10,20,.2) 55%,transparent 74%);opacity:0;mix-blend-mode:screen;pointer-events:none;z-index:5;"></div>
 
   <!-- VIGNETTE -->
   <div style="position:absolute;inset:0;pointer-events:none;z-index:3;background:radial-gradient(ellipse 82% 82% at 50% 50%,transparent 38%,rgba(5,5,4,.58) 76%,rgba(2,2,2,.97) 100%);"></div>
@@ -73,7 +76,7 @@ html,body{width:100%;height:100%;background:#040403;overflow:hidden;}
   <div style="position:absolute;inset:0;pointer-events:none;z-index:3;opacity:.48;mix-blend-mode:overlay;background-image:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.28) 2px,rgba(0,0,0,.28) 3px);animation:scantv .7s steps(2) infinite;"></div>
 
   <!-- GRAIN -->
-  <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.48;mix-blend-mode:overlay;pointer-events:none;z-index:4;" preserveAspectRatio="none">
+  <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.48;mix-blend-mode:overlay;pointer-events:none;z-index:3;" preserveAspectRatio="none">
     <filter id="grain">
       <feTurbulence type="fractalNoise" baseFrequency=".82" numOctaves="2" stitchTiles="stitch">
         <animate attributeName="seed" values="1;6;3;9;4;2" dur=".6s" repeatCount="indefinite" calcMode="discrete"/>
@@ -84,35 +87,31 @@ html,body{width:100%;height:100%;background:#040403;overflow:hidden;}
   </svg>
 
   <!-- LETTERBOX -->
-  <div style="position:absolute;top:0;left:0;right:0;height:44px;background:#020202;z-index:5;pointer-events:none;"></div>
-  <div style="position:absolute;bottom:0;left:0;right:0;height:44px;background:#020202;z-index:5;pointer-events:none;"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:44px;background:#020202;z-index:8;pointer-events:none;"></div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:44px;background:#020202;z-index:8;pointer-events:none;"></div>
 
   <!-- TOP LEFT: STATUS -->
-  <div style="position:absolute;top:54px;left:28px;font-family:'JetBrains Mono',monospace;z-index:6;pointer-events:none;">
+  <div style="position:absolute;top:54px;left:28px;font-family:'JetBrains Mono',monospace;z-index:9;pointer-events:none;">
     <div style="font-size:9px;letter-spacing:4px;color:#E8A04A;text-transform:uppercase;animation:flickr 4s steps(1) infinite;">&#9632; CHAIN ANALYSIS ACTIVE</div>
     <div id="scan-status" style="font-size:9px;letter-spacing:3px;color:rgba(177,18,38,.8);margin-top:5px;text-transform:uppercase;min-height:12px;"></div>
   </div>
 
   <!-- TOP RIGHT: SURVEILLANCE CLOCK -->
-  <div style="position:absolute;top:52px;right:28px;text-align:right;font-family:'JetBrains Mono',monospace;z-index:6;pointer-events:none;">
+  <div style="position:absolute;top:52px;right:28px;text-align:right;font-family:'JetBrains Mono',monospace;z-index:9;pointer-events:none;">
     <div id="clock-date" style="font-size:9px;letter-spacing:3px;color:rgba(232,160,74,.55);text-transform:uppercase;"></div>
     <div id="clock-time" style="font-size:26px;font-weight:700;letter-spacing:3px;color:#E8A04A;margin-top:2px;text-shadow:0 0 12px rgba(232,160,74,.45);font-variant-numeric:tabular-nums;"></div>
     <div style="font-size:8px;letter-spacing:3px;color:rgba(232,160,74,.28);margin-top:2px;">UTC+0 &#183; CHAIN TIMESTAMP</div>
   </div>
 
   <!-- EXPLAINER LOWER THIRD (slides in during wallet visits) -->
-  <div id="explainer" style="position:absolute;bottom:44px;left:0;right:0;height:92px;background:rgba(4,3,2,.9);border-top:1.5px solid rgba(177,18,38,.5);padding:12px 32px 12px 28px;pointer-events:none;z-index:6;opacity:0;">
-    <!-- red left accent -->
+  <div id="explainer" style="position:absolute;bottom:44px;left:0;right:0;height:92px;background:rgba(4,3,2,.92);border-top:1.5px solid rgba(177,18,38,.5);padding:12px 32px 12px 28px;pointer-events:none;z-index:9;opacity:0;">
     <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(to bottom,#B11226,rgba(177,18,38,.3));"></div>
-    <!-- content layout -->
     <div style="display:flex;justify-content:space-between;align-items:flex-end;height:100%;padding-left:12px;">
-      <!-- left: number + name + detail -->
       <div>
         <div id="exp-header" style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:4px;color:#E8A04A;text-transform:uppercase;margin-bottom:5px;"></div>
         <div id="exp-name"   style="font-family:Oswald,sans-serif;font-size:30px;font-weight:600;letter-spacing:2px;color:#e0d5b4;line-height:1;margin-bottom:7px;"></div>
         <div id="exp-detail" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:#8e8272;text-transform:uppercase;"></div>
       </div>
-      <!-- right: event + time gap -->
       <div style="text-align:right;flex-shrink:0;padding-left:24px;">
         <div id="exp-event" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:rgba(177,18,38,.9);text-transform:uppercase;margin-bottom:4px;"></div>
         <div id="exp-countdown" style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;letter-spacing:4px;color:#B11226;text-shadow:0 0 12px rgba(177,18,38,.6);font-variant-numeric:tabular-nums;"></div>
@@ -120,14 +119,14 @@ html,body{width:100%;height:100%;background:#040403;overflow:hidden;}
     </div>
   </div>
 
-  <!-- CREDITS (during wide network shot) -->
-  <div id="credit" style="position:absolute;left:50%;bottom:150px;transform:translateX(-50%);width:90%;text-align:center;opacity:0;pointer-events:none;z-index:6;transition:opacity .18s;">
+  <!-- CREDITS (wide network shot + early hub zoom) -->
+  <div id="credit" style="position:absolute;left:50%;bottom:150px;transform:translateX(-50%);width:90%;text-align:center;opacity:0;pointer-events:none;z-index:9;">
     <div id="creditA" style="font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:6px;color:#E8A04A;text-transform:uppercase;"></div>
-    <div id="creditB" style="font-family:Oswald,sans-serif;font-weight:600;font-size:42px;letter-spacing:3px;color:#ded3b3;margin-top:10px;text-shadow:0 0 16px rgba(177,18,38,.4);"></div>
+    <div id="creditB" style="font-family:Oswald,sans-serif;font-weight:600;font-size:42px;letter-spacing:3px;color:#ded3b3;margin-top:10px;text-shadow:0 0 24px rgba(177,18,38,.5);"></div>
   </div>
 
   <!-- TITLE CARD -->
-  <div id="title-card" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(1.05);opacity:0;text-align:center;pointer-events:none;z-index:6;">
+  <div id="title-card" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(1.05);opacity:0;text-align:center;pointer-events:none;z-index:9;">
     <div style="position:relative;display:inline-block;font-family:Oswald,sans-serif;font-weight:700;font-size:108px;letter-spacing:11px;line-height:.94;text-transform:uppercase;color:#e0d5b4;text-shadow:0 0 28px rgba(177,18,38,.55),0 0 8px rgba(224,213,180,.35);">
       <span style="position:absolute;left:0;top:0;color:#B11226;mix-blend-mode:screen;transform:translateX(-3px);filter:blur(.6px);">ALL IN</span>
       <span style="position:absolute;left:0;top:0;color:#2f7c86;mix-blend-mode:screen;transform:translateX(3px);filter:blur(.6px);">ALL IN</span>
@@ -137,7 +136,7 @@ html,body{width:100%;height:100%;background:#040403;overflow:hidden;}
   </div>
 
   <!-- TAGLINE -->
-  <div id="tagline" style="position:absolute;left:50%;bottom:150px;transform:translateX(-50%);opacity:0;font-family:'JetBrains Mono',monospace;font-size:22px;letter-spacing:8px;color:#cabd93;text-transform:uppercase;text-align:center;z-index:6;white-space:nowrap;">
+  <div id="tagline" style="position:absolute;left:50%;bottom:150px;transform:translateX(-50%);opacity:0;font-family:'JetBrains Mono',monospace;font-size:22px;letter-spacing:8px;color:#cabd93;text-transform:uppercase;text-align:center;z-index:9;white-space:nowrap;">
     NINE WALLETS &nbsp;&#183;&nbsp; 98% ACCURACY
   </div>
 
@@ -164,10 +163,9 @@ const RED='#B11226', AMBER='#E8A04A';
 /* ─── WALLET DATA ─────────────────────────────────────────────────────── */
 const HUB={
   x:1400,y:750,sz:118,addr:'0xoracle.eth',profit:'$2.41M',bets:'23 BETS',winRate:'98%',
-  betDate:'JUN 21 2025',betTimeSecs:2*3600+18*60+56,eventMins:6,event:'IRAN STRIKE'
+  betDate:'JUN 21 2025',betTimeSecs:2*3600+18*60+56
 };
 
-// Each wallet has a short explainer that appears in the lower-third
 const WALLET_DEFS=[
   {addr:'Skoobidoobnj',type:'hot', profit:'$312K',winRate:'97%',num:'01',angle:0,
    betDate:'NOV 23 2024',betTimeSecs:23*3600+47*60+12,eventMins:12,event:'MILITARY STRIKE',
@@ -201,33 +199,31 @@ const WALLETS=WALLET_DEFS.map((w,i)=>{
   return{...w,id:i,x:Math.round(HUB.x+R_RING*Math.cos(rad)),y:Math.round(HUB.y+R_RING*Math.sin(rad)),sz:w.type==='hot'?30:24};
 });
 
-/* ─── CAMERA TIMING — 3s dwell per wallet ────────────────────────────── */
-// Tour: t=1 through t=25 (8 wallets × 3s each)
-// Wide pullback: t=25
-// Hub zoom begins: t=36
-// Title reveal: t=46
-// Total: 62s
-const DWELL=3;
-const VISIT_T=WALLETS.map((_,i)=>1+i*DWELL); // [1,4,7,10,13,16,19,22]
+/* ─── TIMING — 4s dwell per wallet ───────────────────────────────────── */
+// Tour: t=1 → t=33 (1s open + 8 wallets × 4s each)
+// Wide hold + credits: t=33 → t=42
+// Hub zoom: t=42 → t=64 (title at t=52, tagline at t=58)
+const DWELL=4;
+const VISIT_T=WALLETS.map((_,i)=>1+i*DWELL); // [1,5,9,13,17,21,25,29]
 
 const CAM=[
   {t:0, fx:1400,fy:750, s:0.29},
   ...WALLETS.map((w,i)=>({t:VISIT_T[i], fx:w.x, fy:w.y, s:1.72})),
-  {t:25,fx:1400,fy:750, s:0.32}, // pull back
-  {t:31,fx:1400,fy:750, s:0.38}, // wide hold
-  {t:36,fx:1400,fy:750, s:0.55}, // begin hub zoom
-  {t:43,fx:1400,fy:750, s:1.10},
-  {t:46,fx:1400,fy:750, s:1.58}, // title reveal
-  {t:48,fx:1400,fy:750, s:1.95},
-  {t:62,fx:1400,fy:750, s:2.12},
+  {t:33,fx:1400,fy:750, s:0.32},  // pull back
+  {t:38,fx:1400,fy:750, s:0.38},  // wide hold
+  {t:42,fx:1400,fy:750, s:0.55},  // begin hub zoom
+  {t:50,fx:1400,fy:750, s:1.08},  // closing in
+  {t:53,fx:1400,fy:750, s:1.58},  // tight — title reveal
+  {t:55,fx:1400,fy:750, s:1.95},  // very tight
+  {t:64,fx:1400,fy:750, s:2.12},
 ];
 
-/* ─── CREDITS (post-tour, during wide hold) ──────────────────────────── */
+/* ─── CREDITS ─────────────────────────────────────────────────────────── */
 const CREDITS=[
-  {s:25.5,a:'nine wallets',     b:'COORDINATED POSITIONS'},
-  {s:29.5,a:'98% win rate',     b:'MILITARY OUTCOMES'},
-  {s:33.5,a:'$2.41 million',    b:'DOCUMENTED PROFIT'},
-  {s:39.5,a:'the pattern',      b:'HAS NO NAME'},
+  {s:33.5,a:'nine wallets',     b:'COORDINATED POSITIONS'},
+  {s:37.0,a:'98% win rate',     b:'MILITARY OUTCOMES'},
+  {s:40.5,a:'$2.41 million',    b:'DOCUMENTED PROFIT'},
+  {s:45.0,a:'the pattern',      b:'HAS NO NAME'},
 ];
 
 /* ─── SVG LINES ───────────────────────────────────────────────────────── */
@@ -321,30 +317,30 @@ function minSecStr(totalSecs){
 }
 
 /* ─── DOM REFS ────────────────────────────────────────────────────────── */
-const worldEl    =document.getElementById('world');
-const scalerEl   =document.getElementById('scaler');
-const flashEl    =document.getElementById('flash');
-const alertEl    =document.getElementById('alert-pulse');
-const creditEl   =document.getElementById('credit');
-const creditAEl  =document.getElementById('creditA');
-const creditBEl  =document.getElementById('creditB');
-const titleCard  =document.getElementById('title-card');
-const taglineEl  =document.getElementById('tagline');
-const progressEl =document.getElementById('progress-bar');
-const timeEl     =document.getElementById('time-disp');
-const btnPlay    =document.getElementById('btn-play');
-const clockDateEl=document.getElementById('clock-date');
-const clockTimeEl=document.getElementById('clock-time');
-const scanStatusEl=document.getElementById('scan-status');
-// Explainer lower-third
-const expEl      =document.getElementById('explainer');
-const expHeaderEl=document.getElementById('exp-header');
-const expNameEl  =document.getElementById('exp-name');
-const expDetailEl=document.getElementById('exp-detail');
-const expEventEl =document.getElementById('exp-event');
-const expCdEl    =document.getElementById('exp-countdown');
+const worldEl      =document.getElementById('world');
+const scalerEl     =document.getElementById('scaler');
+const flashEl      =document.getElementById('flash');
+const alertEl      =document.getElementById('alert-pulse');
+const readOverlayEl=document.getElementById('read-overlay');
+const creditEl     =document.getElementById('credit');
+const creditAEl    =document.getElementById('creditA');
+const creditBEl    =document.getElementById('creditB');
+const titleCard    =document.getElementById('title-card');
+const taglineEl    =document.getElementById('tagline');
+const progressEl   =document.getElementById('progress-bar');
+const timeEl       =document.getElementById('time-disp');
+const btnPlay      =document.getElementById('btn-play');
+const clockDateEl  =document.getElementById('clock-date');
+const clockTimeEl  =document.getElementById('clock-time');
+const scanStatusEl =document.getElementById('scan-status');
+const expEl        =document.getElementById('explainer');
+const expHeaderEl  =document.getElementById('exp-header');
+const expNameEl    =document.getElementById('exp-name');
+const expDetailEl  =document.getElementById('exp-detail');
+const expEventEl   =document.getElementById('exp-event');
+const expCdEl      =document.getElementById('exp-countdown');
 
-const DURATION=62;
+const DURATION=64;
 let elapsed=0,playing=true,last=null,curBeat=null,curFocus=-1;
 
 /* ─── FIT ─────────────────────────────────────────────────────────────── */
@@ -358,12 +354,10 @@ function camAt(t){
   let u=b.t===a.t?0:(t-a.t)/(b.t-a.t);u=Math.max(0,Math.min(1,u));u=u*u*(3-2*u);
   return{fx:a.fx+(b.fx-a.fx)*u,fy:a.fy+(b.fy-a.fy)*u,s:a.s+(b.s-a.s)*u};
 }
-
-// Focus window: camera is at wallet from VISIT_T[i] to VISIT_T[i]+DWELL
 function focusAt(t){
   for(let i=0;i<WALLETS.length;i++){
     const s=VISIT_T[i];
-    if(t>=s-0.25&&t<s+DWELL-0.25) return i;
+    if(t>=s-0.3&&t<s+DWELL-0.3)return i;
   }
   return -1;
 }
@@ -372,38 +366,43 @@ function fmt(t){const m=Math.floor(t/60),s=Math.floor(t%60);return String(m).pad
 /* ─── FRAME ───────────────────────────────────────────────────────────── */
 function applyFrame(t){
 
-  // Camera — gentle drift (reduced when reading explainer)
+  // Camera — minimal drift while reading, gentle when moving
   const c=camAt(t);
   const focus=focusAt(t);
-  // Less drift while at a wallet so text is stable
-  const driftAmt=focus>=0?2:5;
-  const dx=Math.sin(t*.44)*driftAmt+Math.sin(t*.79)*(driftAmt*.6);
-  const dy=Math.cos(t*.38)*driftAmt+Math.cos(t*.67)*(driftAmt*.5);
+  const dAmt=focus>=0?1.5:4;
+  const dx=Math.sin(t*.44)*dAmt, dy=Math.cos(t*.38)*dAmt;
   worldEl.style.transform='translate('+(700-c.s*(c.fx+dx))+'px,'+(300-c.s*(c.fy+dy))+'px) scale('+c.s+')';
 
   // Wallet activation + scan rings
   WALLETS.forEach((w,i)=>{
     const vt=VISIT_T[i];
     let op;
-    if(t<vt-0.6) op=0.09;
-    else if(t<vt+0.7) op=0.09+0.91*Math.min(1,(t-(vt-0.6))/0.7);
+    if(t<vt-0.7) op=0.09;
+    else if(t<vt+0.8) op=0.09+0.91*Math.min(1,(t-(vt-0.7))/0.8);
     else op=1;
     walletEls[i].style.opacity=op;
     scanRingEls[i].style.opacity=focus===i?'1':'0';
   });
 
-  // Alert wash
   alertEl.style.opacity=focus>=0?'1':'0';
+
+  // ── READABILITY OVERLAY ──────────────────────────────────────────────
+  // Fades in as hub zoom starts (t=42), fully opaque by title reveal (t=53)
+  // This makes the network background go dark so text is crisp
+  let readOp=0;
+  if(t>=42){
+    readOp=Math.min(0.88,(t-42)/11*0.88);
+  }
+  readOverlayEl.style.opacity=String(readOp);
 
   // ── SURVEILLANCE CLOCK ──────────────────────────────────────────────
   let cSecs,cDate;
   if(focus>=0){
     const w=WALLETS[focus];
-    // Fast tick during dwell: 1 second of dwell = 60 seconds of clock (replay effect)
     cSecs=(w.betTimeSecs+Math.floor((t-VISIT_T[focus])*60))%86400;
     cDate=w.betDate;
-  }else if(t>=25){
-    cSecs=(HUB.betTimeSecs+Math.floor((t-25)*2))%86400;
+  }else if(t>=33){
+    cSecs=(HUB.betTimeSecs+Math.floor((t-33)*2))%86400;
     cDate=HUB.betDate;
   }else{
     cSecs=HUB.betTimeSecs;cDate=HUB.betDate;
@@ -416,7 +415,6 @@ function applyFrame(t){
     const w=WALLETS[focus];
     const intoFocus=t-VISIT_T[focus];
 
-    // Update content when focus changes
     if(focus!==curFocus){
       expHeaderEl.textContent='WALLET '+w.num+' / 09  ·  WIN RATE '+w.winRate;
       expNameEl.textContent=w.addr;
@@ -426,33 +424,28 @@ function applyFrame(t){
       curFocus=focus;
     }
 
-    // Countdown: minutes remaining before event, counting toward zero
-    // 1 screen-second = 1 real-world minute (fast forward feeling)
+    // Countdown: 1 screen-second = 1 real-world minute
     const remMins=Math.max(0,w.eventMins-intoFocus);
-    const remTotalSecs=remMins*60;
-    expCdEl.textContent='T − '+minSecStr(remTotalSecs);
-    // Color warning near zero
+    expCdEl.textContent='T − '+minSecStr(remMins*60);
     expCdEl.style.color=remMins<4?'#ff2040':RED;
 
-    // Fade in the explainer
-    const fadeIn=Math.min(1,intoFocus/0.5);
-    // Start fading out 0.5s before next wallet
-    const timeLeft=(VISIT_T[focus]+DWELL-0.5)-t;
-    const fadeOut=Math.min(1,Math.max(0,timeLeft/0.4));
+    // Fade in at start, fade out 0.6s before next wallet
+    const fadeIn=Math.min(1,intoFocus/0.55);
+    const timeLeft=(VISIT_T[focus]+DWELL-0.6)-t;
+    const fadeOut=Math.min(1,Math.max(0,timeLeft/0.45));
     expEl.style.opacity=String(Math.min(fadeIn,fadeOut));
   }else{
     expEl.style.opacity='0';
-    // When tour is over, clear scan status
-    if(t>=25&&t<25.5) scanStatusEl.textContent='all 9 wallets identified';
-    if(t>=37) scanStatusEl.textContent='';
+    if(t>=33&&t<33.6) scanStatusEl.textContent='all 9 wallets identified';
+    if(t>=44) scanStatusEl.textContent='';
   }
 
   // ── CREDITS ─────────────────────────────────────────────────────────
   let cop=0,beat=null;
-  if(t>=25&&t<44){
+  if(t>=33&&t<51){
     for(const cr of CREDITS){
       const l=t-cr.s;
-      if(l>=0&&l<=4.2){beat=cr;const f=.65;cop=Math.max(0,Math.min(1,Math.min(l/f,(4.2-l)/f,1)));break;}
+      if(l>=0&&l<=4.4){beat=cr;const f=.65;cop=Math.max(0,Math.min(1,Math.min(l/f,(4.4-l)/f,1)));break;}
     }
   }
   creditEl.style.opacity=cop;
@@ -460,22 +453,21 @@ function applyFrame(t){
 
   // ── TITLE CARD ──────────────────────────────────────────────────────
   let to=0,ts=1.05;
-  if(t>=46){const l=t-46;to=Math.min(1,l/2.2);ts=1.05-Math.min(0.05,l*.02);}
-  if(t>=59){to=Math.max(0,to-(t-59)/1.8);}
+  if(t>=53){const l=t-53;to=Math.min(1,l/2.2);ts=1.05-Math.min(0.05,l*.02);}
+  if(t>=61){to=Math.max(0,to-(t-61)/1.8);}
   titleCard.style.opacity=to;
   titleCard.style.transform='translate(-50%,-50%) scale('+ts+')';
 
   // ── FLASH ────────────────────────────────────────────────────────────
   let fo=0;
-  if(t>=46&&t<46.8) fo=Math.sin((t-46)/.8*Math.PI)*.7;
-  // Brief flash on each wallet arrival
+  if(t>=53&&t<53.8) fo=Math.sin((t-53)/.8*Math.PI)*.7;
   WALLETS.forEach((_,i)=>{const a=VISIT_T[i];if(t>=a&&t<a+0.3)fo=Math.max(fo,(0.3-(t-a))/0.3*.4);});
   flashEl.style.opacity=Math.max(0,fo);
 
   // ── TAGLINE ──────────────────────────────────────────────────────────
   let go=0;
-  if(t>=53) go=Math.min(1,(t-53)/1.5);
-  if(t>=60) go=Math.max(0,go-(t-60)/1.2);
+  if(t>=59)go=Math.min(1,(t-59)/1.5);
+  if(t>=62)go=Math.max(0,go-(t-62)/1.5);
   taglineEl.style.opacity=go;
 
   progressEl.style.width=(t/DURATION*100)+'%';
@@ -500,7 +492,7 @@ document.getElementById('btn-restart').addEventListener('click',()=>{
   elapsed=0;curBeat=null;curFocus=-1;playing=true;btnPlay.textContent='PAUSE';
   creditAEl.textContent='';creditBEl.textContent='';
   WALLETS.forEach((_,i)=>{walletEls[i].style.opacity='0.09';scanRingEls[i].style.opacity='0';});
-  expEl.style.opacity='0';
+  expEl.style.opacity='0';readOverlayEl.style.opacity='0';
 });
 document.getElementById('progress-track').addEventListener('click',e=>{
   const r=e.currentTarget.getBoundingClientRect();
