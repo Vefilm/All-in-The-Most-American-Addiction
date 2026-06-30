@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polymarket: June 21–26, 2026 | ALL IN: Betting on America</title>
+  <meta name="description" content="Six days. Three crises. One company. Research brief from ALL IN: Betting on America.">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <style>
+    :root {
+      --black:   #0A0A0A;
+      --ink:     #111111;
+      --red:     #B11226;
+      --amber:   #E8A04A;
+      --white:   #FFFFFF;
+      --card-bg: #141414;
+      --card-border: #1E1E1E;
+      --font-serif: Georgia, 'Times New Roman', serif;
+      --font-sans: Calibri, system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-serif);
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── HEADER ─── */
+    .brief-header {
+      background: var(--ink);
+      border-bottom: 3px solid var(--red);
+      padding: 3.5rem 2rem 3rem;
+    }
+
+    .brief-header-inner {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .wordmark {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 2.5rem;
+    }
+
+    .wordmark span {
+      color: var(--red);
+    }
+
+    .brief-kicker {
+      font-family: var(--font-sans);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+
+    .brief-title {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: clamp(2.25rem, 6vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .brief-sub {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: rgba(255,255,255,0.65);
+      max-width: 600px;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .brief-meta {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .meta-item {
+      font-family: var(--font-sans);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .meta-item span {
+      display: block;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.8125rem;
+      margin-top: 0.2rem;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+      font-family: var(--font-serif);
+    }
+
+    /* ── BODY ─── */
+    .brief-body {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+    }
+
+    /* ── CRISIS BLOCK ─── */
+    .crisis {
+      padding: 3.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .crisis-date {
+      font-family: var(--font-sans);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+
+    .crisis-title {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    .crisis p {
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 1.25rem;
+      font-size: 1.0625rem;
+    }
+
+    .crisis p:last-child { margin-bottom: 0; }
+
+    /* ── STAT GRID ─── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.07);
+      margin: 2rem 0;
+    }
+
+    .stat {
+      background: var(--card-bg);
+      padding: 1.5rem;
+    }
+
+    .stat-label {
+      font-family: var(--font-sans);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-num {
+      font-family: var(--font-sans);
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: 0.375rem;
+    }
+
+    .stat-note {
+      font-family: var(--font-serif);
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+    }
+
+    /* ── CALLOUT ─── */
+    .callout {
+      border-left: 3px solid var(--red);
+      padding: 1.25rem 1.5rem;
+      background: rgba(177,18,38,0.06);
+      margin: 2rem 0;
+    }
+
+    .callout-label {
+      font-family: var(--font-sans);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--red);
+      display: block;
+      margin-bottom: 0.625rem;
+    }
+
+    .callout p {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ── HUMAN STORY ─── */
+    .human-block {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-top: 3px solid var(--amber);
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .human-label {
+      font-family: var(--font-sans);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.75rem;
+    }
+
+    .human-block h3 {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .human-block p {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.7;
+      margin-bottom: 0.875rem;
+    }
+
+    .human-block p:last-child { margin-bottom: 0; }
+
+    /* ── CREATOR CARDS ─── */
+    .creator-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .creator-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 1.375rem;
+    }
+
+    .creator-role {
+      font-family: var(--font-sans);
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 0.375rem;
+    }
+
+    .creator-name {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .creator-detail {
+      font-family: var(--font-serif);
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+    }
+
+    .creator-handle {
+      display: inline-block;
+      margin-top: 0.625rem;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: var(--amber);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── OPEN ITEMS ─── */
+    .open-list {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+
+    .open-list li {
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: rgba(255,255,255,0.78);
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .open-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 1.45rem;
+      width: 6px;
+      height: 6px;
+      background: var(--red);
+    }
+
+    .open-list li strong {
+      color: var(--white);
+    }
+
+    /* ── DEFENDANT CARDS ─── */
+    .defendant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .defendant-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(177,18,38,0.3);
+      border-top: 3px solid var(--red);
+      padding: 1.375rem;
+    }
+
+    .defendant-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.375rem;
+    }
+
+    .defendant-name {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .defendant-detail {
+      font-family: var(--font-serif);
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+    }
+
+    /* ── SECTION DIVIDER ─── */
+    .section-head {
+      padding-top: 3.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-h2 {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: clamp(1.375rem, 3vw, 1.875rem);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── FOOTER ─── */
+    .brief-footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .brief-footer p {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.05em;
+    }
+
+    .brief-footer strong {
+      color: rgba(255,255,255,0.45);
+    }
+
+    @media (max-width: 600px) {
+      .brief-header, .brief-body { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER ───────────────────────────────────────────── -->
+  <header class="brief-header">
+    <div class="brief-header-inner">
+      <p class="wordmark">ALL IN: BETTING ON AMERICA &nbsp;/&nbsp; <span>RESEARCH BRIEF</span></p>
+      <p class="brief-kicker">Polymarket &nbsp;·&nbsp; June 21 to 26, 2026</p>
+      <h1 class="brief-title">Six Days.<br>Three Crises.<br>One Company.</h1>
+      <p class="brief-sub">In the span of one week, Polymarket became the subject of a federal consumer lawsuit, a CFTC probe expansion, a bipartisan Senate inquiry, and a $3.1 million security breach. Revenue crossed one billion dollars through all of it.</p>
+      <div class="brief-meta">
+        <div class="meta-item">Compiled<span>June 30, 2026</span></div>
+        <div class="meta-item">Project<span>All In: Betting on America</span></div>
+        <div class="meta-item">Filmmaker<span>Pedro Feria Pino</span></div>
+        <div class="meta-item">Sources<span>WSJ, Bloomberg, CFTC, Senate, court filings</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── BODY ─────────────────────────────────────────────── -->
+  <main class="brief-body">
+
+    <!-- CRISIS 1 -->
+    <div class="crisis">
+      <p class="crisis-date">June 21, 2026</p>
+      <h2 class="crisis-title">The Fake Winners</h2>
+
+      <p>The Wall Street Journal published a visual investigation revealing that Polymarket had paid mostly college-age creators to film fake winning trades on dummy replica websites designed to look identical to the live platform. One counterfeit domain, poiymarket.com, was so close to the real URL that only a capital I gave it away.</p>
+
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-label">Videos Reviewed</div>
+          <div class="stat-num">1,105</div>
+          <div class="stat-note">From 10 paid creators, Dec 2025 to mid-May 2026</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Total Views</div>
+          <div class="stat-num">140M+</div>
+          <div class="stat-note">TikTok, YouTube, Instagram. Tracked by Tubular.</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Fake Wins Staged</div>
+          <div class="stat-num">$900K</div>
+          <div class="stat-note">Across 118 videos showing creators celebrating wins</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">CMO PayPal Payments</div>
+          <div class="stat-num">$350K+</div>
+          <div class="stat-note">Matthew Modabber paid creators via personal PayPal. That account sent over $2.5M to 800+ people total.</div>
+        </div>
+      </div>
+
+      <p>Creators were paid between $2,000 and $3,000 per month and instructed not to disclose their relationship with Polymarket. They were paid only when at least 60 percent of their audience was based in the United States. That condition was deliberate: Polymarket has been barred from serving American users since a 2022 CFTC settlement.</p>
+
+      <p>Polymarket employed a marketing firm called Virality to manage an army of clippers: teenagers, mostly in Asia, who reposted creator content on freshly created accounts for $1 per 1,000 views. Internal chat logs from nearly 20,000 messages showed Virality instructing clippers to make reposts feel spontaneous and authentically personal and to remove any mention of Polymarket from their usernames.</p>
+
+      <div class="callout">
+        <span class="callout-label">The Adin Ross Deal</span>
+        <p>Adin Ross, a 25-year-old creator with 19 million followers, has a multimillion-dollar deal with Polymarket and averages a half hour per week on his livestream scrolling through Polymarket and discussing potential trades. In at least five videos, Ross identified on camera how he could use inside information to win on the platform. Polymarket and Virality targeted his videos for promotion. Ross called it information arbitrage.</p>
+      </div>
+
+      <p>The same week, TikTok began restricting accounts identified in the Journal's investigation. YouTube said creators and brands must comply with legal obligations. Meta said it could not confirm whether the content violated its policies without independently verifying the payments.</p>
+
+      <div class="section-head" style="padding-top: 2rem;">
+        <p class="section-eyebrow">The People</p>
+        <h3 class="section-h2">The Named Creators</h3>
+      </div>
+
+      <div class="creator-grid">
+        <div class="creator-card">
+          <div class="creator-role">Creator 01</div>
+          <div class="creator-name">George Makihara</div>
+          <div class="creator-detail">College student. 145 fake bets totaling nearly $410,000, January to mid-May 2026. Most viral: a fake $100,000 win on Trump saying the word McDonald's. Declined to comment. On TikTok.</div>
+        </div>
+        <div class="creator-card">
+          <div class="creator-role">Creator 02</div>
+          <div class="creator-name">Razeen Khan</div>
+          <div class="creator-detail">College student, California. Worked with Polymarket through March 2026. On the record: compared fake videos to fast food commercials. "We're depicting what actually happens. You're still going to buy the burger."</div>
+          <span class="creator-handle">TikTok: @razeenkhan6 (verify)</span>
+        </div>
+        <div class="creator-card">
+          <div class="creator-role">Creator 03</div>
+          <div class="creator-name">Haian Nguyen</div>
+          <div class="creator-detail">San Francisco. Top performer. Fake $60,000 win on Trump saying Olympics. Video caption: "Polymarket funds my life." Declined to comment. Deleted all videos after WSJ contact.</div>
+          <span class="creator-handle">Instagram: @haianwins (verify)</span>
+        </div>
+        <div class="creator-card">
+          <div class="creator-role">Creator 04</div>
+          <div class="creator-name">Lucas Nguyen</div>
+          <div class="creator-detail">Did not respond to WSJ requests for comment. No confirmed public handle.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE HUMAN STORY -->
+    <div class="human-block">
+      <div class="human-label">The Human Story</div>
+      <h3>50 People Lost the Bet George Makihara Faked Winning</h3>
+      <p>On Polymarket's actual site, public data shows more than 50 real accounts placed the Trump McDonald's bet in January 2026. George Makihara's videos showed him winning $100,000 on that position. The videos were fake. The bet was filmed on a counterfeit website.</p>
+      <p>All 50 accounts lost.</p>
+      <p>These are ordinary people who watched what looked like a college student winning $100,000 on a simple bet, decided to place the same wager on the real platform, and lost real money on a position that had been manufactured to look like free money. They are the human consequence of a marketing campaign the company's CEO told his growth team to make impossible to ignore.</p>
+    </div>
+
+    <!-- CRISIS 2 -->
+    <div class="crisis">
+      <p class="crisis-date">June 25, 2026</p>
+      <h2 class="crisis-title">The $3.1 Million Hack</h2>
+
+      <p>A third-party vendor that supplies frontend code to Polymarket was compromised. Attackers injected a malicious script into the page users see in their browser, tricking users into signing unauthorized transactions. On-chain tracking by PeckShield and Bubblemaps confirmed approximately $3.1 million drained from 11 to 15 wallets. The stolen funds were converted to roughly 1,893 ETH and moved through attacker-controlled addresses.</p>
+
+      <p>Polymarket pledged full refunds to all affected users and said it had contained and removed the malicious code. The hack arrived four days after the fake winner story dropped and one day before the triple regulatory escalation.</p>
+
+      <div class="callout">
+        <span class="callout-label">The Named Victim</span>
+        <p>A user known as Ash posted on X in real time as his wallet was being drained, saying he had no idea what was happening. He shared his wallet address and the attacker's address publicly, giving on-chain investigators the data to begin tracking. He is the only named victim in public reporting. Ten others lost funds without being publicly identified.</p>
+      </div>
+    </div>
+
+    <!-- CRISIS 3 -->
+    <div class="crisis">
+      <p class="crisis-date">June 26, 2026</p>
+      <h2 class="crisis-title">Three Escalations. One Day.</h2>
+
+      <p>On the same day, three separate institutions moved against Polymarket.</p>
+
+      <div class="defendant-grid" style="margin-bottom: 1.75rem;">
+        <div class="defendant-card">
+          <div class="defendant-eyebrow">CFTC</div>
+          <div class="defendant-name">Expanded Federal Probe</div>
+          <div class="defendant-detail">Bloomberg reports the CFTC is conducting a broad probe into Polymarket's operations and social media activity, expanding beyond the prior investigation that was closed in July 2025 with no charges. The CFTC chair overseeing this probe is Michael Selig, whose ethics recusal from his former crypto clients expires mid-2026.</div>
+        </div>
+        <div class="defendant-card">
+          <div class="defendant-eyebrow">Federal Lawsuit</div>
+          <div class="defendant-name">Coplan + Modabber Named Personally</div>
+          <div class="defendant-detail">Vaca Daffan Law files on behalf of the National Association of Consumer Advocates. Defendants: Blockratize (parent company), CEO Shayne Coplan, and CMO Matthew Modabber personally. Allegation: a sweeping and flagrantly deceptive marketing campaign targeting college-aged individuals.</div>
+        </div>
+        <div class="defendant-card">
+          <div class="defendant-eyebrow">Senate</div>
+          <div class="defendant-name">Curtis + Schiff Joint Letter</div>
+          <div class="defendant-detail">Senators John Curtis (R-UT) and Adam Schiff (D-CA) write jointly to CFTC Chairman Michael Selig calling the allegations deeply troubling and demanding a written response by July 10, 2026. Curtis and Schiff are the same bipartisan pair who introduced legislation targeting sports wagers on CFTC-regulated platforms.</div>
+        </div>
+      </div>
+
+      <p>Through all three escalations, Polymarket reported revenue crossing one billion dollars.</p>
+
+      <div class="callout">
+        <span class="callout-label">The Context That Makes This Matter</span>
+        <p>The CFTC that is now probing Polymarket is the same CFTC that cleared it in July 2025. The chair running this probe previously represented Polymarket-adjacent clients at Willkie Farr. Donald Trump Jr. holds equity in Polymarket and sits on its advisory board. He is simultaneously a paid strategic adviser to Kalshi, Polymarket's primary regulated rival. Trump personally called state politicians who want to regulate prediction markets "SCUM" in a Truth Social post. The CFTC under Selig has filed more than half a dozen lawsuits to stop states from regulating or taxing prediction markets. The regulatory pressure converging on June 26 is landing on a platform that sits at the center of the Trump financial network.</p>
+      </div>
+    </div>
+
+    <!-- WHAT'S OPEN -->
+    <div class="section-head">
+      <p class="section-eyebrow">Status</p>
+      <h2 class="section-h2">What Remains Open</h2>
+    </div>
+
+    <ul class="open-list">
+      <li><strong>July 10, 2026</strong> CFTC Chairman Michael Selig must respond to the Curtis-Schiff Senate letter. His answer is a public document and a potential filming opportunity.</li>
+      <li><strong>Adin Ross clips</strong> Five on-camera videos of Ross discussing insider trading on Polymarket. Confirmed to exist on Kick.com VOD archives. WSJ reporters Katherine Long and Caitlin Ostroff have the specific clips.</li>
+      <li><strong>The 50 McDonald's bettors</strong> Their identities are technically derivable from Polymarket's public blockchain data. A data journalist with Bubblemaps-level tools could potentially name them. This is the human story of the film.</li>
+      <li><strong>Hack victims</strong> 10 of the 11 affected wallets have not been publicly named. Polymarket is contacting them for refunds. This is a documentary access opportunity.</li>
+      <li><strong>December 7, 2026</strong> Sgt. Van Dyke trial. First prediction market insider trading case to go to trial in US history.</li>
+      <li><strong>Creator contacts</strong> George Makihara (declined comment, TikTok), Razeen Khan (on record, TikTok @razeenkhan6), Haian Nguyen (declined comment, deleted content, Instagram @haianwins), Lucas Nguyen (no response).</li>
+    </ul>
+
+    <div style="padding: 3rem 0 1rem; border-top: 1px solid rgba(255,255,255,0.07); margin-top: 1rem;">
+      <p style="font-family: var(--font-sans); font-size: 0.75rem; color: rgba(255,255,255,0.3); letter-spacing: 0.04em;">Sources: Wall Street Journal Jun 21, 2026 &nbsp;·&nbsp; Bloomberg Jun 26, 2026 &nbsp;·&nbsp; TechCrunch Jun 25, 2026 &nbsp;·&nbsp; CoinDesk Jun 27, 2026 &nbsp;·&nbsp; Curtis.senate.gov Jun 26, 2026 &nbsp;·&nbsp; Bloomberg Law Jun 26, 2026 &nbsp;·&nbsp; CNBC May 27, 2026 &nbsp;·&nbsp; Fortune Jun 29, 2026</p>
+    </div>
+
+  </main>
+
+  <!-- ── FOOTER ────────────────────────────────────────────── -->
+  <footer class="brief-footer">
+    <p><strong>ALL IN: BETTING ON AMERICA</strong> &nbsp;·&nbsp; Pedro Feria Pino &nbsp;·&nbsp; VEFILM &nbsp;·&nbsp; Confidential production research. Not for distribution. &copy; 2026</p>
+  </footer>
+
+</body>
+</html>
