@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALL IN — Interview Archive</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #B11226;
+    --amber: #E8A04A;
+    --bg: #060508;
+    --surface: #0a0a12;
+    --body: #e8e0d0;
+    --muted: rgba(255,255,255,0.55);
+    --dim: rgba(255,255,255,0.28);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--body); font-family: Georgia, serif; line-height: 1.88; padding: 60px 40px; max-width: 880px; margin: 0 auto; }
+
+  .logo { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+  .logo span { color: var(--red); }
+  .logo-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.38em; text-transform: uppercase; color: rgba(232,160,74,0.7); margin-bottom: 44px; }
+
+  .archive-eye { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; }
+  .archive-title { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+  .archive-sub { font-size: 0.88rem; color: var(--muted); font-style: italic; margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 32px; }
+
+  .nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 56px; }
+  .nav a {
+    display: block;
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 16px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: border-color 0.15s;
+  }
+  .nav a:hover { border-color: rgba(177,18,38,0.4); }
+  .nav-label { font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--amber); margin-bottom: 4px; }
+  .nav-name { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; color: var(--body); letter-spacing: 0.03em; }
+  .nav-role { font-size: 0.78rem; color: var(--muted); font-family: Georgia, serif; font-style: italic; margin-top: 3px; }
+
+  .interview-section { margin-bottom: 80px; }
+
+  .interview-header { margin-bottom: 36px; padding: 28px 32px; background: var(--surface); border-radius: 4px; border-left: 4px solid var(--red); }
+  .interview-num { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.36em; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; }
+  .interview-name { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 3rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; line-height: 1.1; }
+  .interview-role { font-size: 0.9rem; color: var(--muted); font-style: italic; margin-bottom: 18px; }
+
+  .divider { border: none; border-top: 2px solid rgba(177,18,38,0.25); margin: 80px 0; }
+  .interview-meta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 3px;
+  }
+  .badge-confirmed { background: rgba(177,18,38,0.15); border: 1px solid rgba(177,18,38,0.35); color: var(--red); }
+  .badge-considering { background: rgba(232,160,74,0.1); border: 1px solid rgba(232,160,74,0.3); color: var(--amber); }
+  .badge-background { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color: var(--muted); }
+  .badge-date { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: var(--dim); }
+
+  .exchange { margin-bottom: 24px; }
+  .speaker { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 8px; display: inline-block; padding: 3px 10px; border-radius: 20px; }
+  .speaker.pedro { background: rgba(232,160,74,0.18); border: 1px solid rgba(232,160,74,0.45); color: var(--amber); }
+  .speaker.guest { background: rgba(177,18,38,0.18); border: 1px solid rgba(177,18,38,0.45); color: #e87a8a; }
+  .speaker.guest-bg { background: rgba(232,160,74,0.07); border: 1px solid rgba(232,160,74,0.2); color: rgba(232,160,74,0.55); }
+  .line { font-size: 0.9rem; line-height: 1.92; color: var(--body); padding: 12px 16px; border-radius: 4px; }
+  .speaker.pedro ~ .line { background: rgba(232,160,74,0.07); border-left: 2px solid rgba(232,160,74,0.35); }
+  .speaker.guest ~ .line { background: rgba(177,18,38,0.07); border-left: 2px solid rgba(177,18,38,0.35); }
+  .speaker.guest-bg ~ .line { background: rgba(232,160,74,0.04); border-left: 2px solid rgba(232,160,74,0.15); }
+
+  .pull { background: var(--surface); border-left: 3px solid var(--red); padding: 18px 22px; margin: 28px 0; border-radius: 0 4px 4px 0; }
+  .pull .pull-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+  .pull .pull-text { font-size: 0.9rem; font-style: italic; line-height: 1.78; }
+
+  .bg-notice { background: rgba(232,160,74,0.07); border: 1px solid rgba(232,160,74,0.2); border-radius: 4px; padding: 14px 18px; margin-bottom: 28px; font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); }
+
+  .divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 60px 0; }
+
+  .section-break { font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); text-align: center; margin: 36px 0; }
+
+  .clock { text-align: center; border-top: 1px solid rgba(177,18,38,0.3); padding-top: 36px; margin-top: 60px; }
+  .clock-eye { font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--dim); margin-bottom: 10px; }
+  .clock-date { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2.2rem; color: var(--red); letter-spacing: 0.08em; }
+  .clock-label { font-family: 'JetBrains Mono', monospace; font-size: 0.54rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); margin-top: 8px; }
+
+  .foot { margin-top: 40px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.54rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.12); }
+</style>
+</head>
+<body>
+
+<div class="logo">ALL <span>IN</span></div>
+<div class="logo-sub">Betting on America</div>
+
+<div class="archive-eye">Interview Archive &nbsp;·&nbsp; Pre-Production</div>
+<div class="archive-title">All Interviews</div>
+
+<div class="nav">
+  <a href="#michael">
+    <div class="nav-label">Interview 01</div>
+    <div class="nav-name">Michael Hornsby</div>
+    <div class="nav-role">ACDC Research Fellow, Paris</div>
+  </a>
+  <a href="#david-bg">
+    <div class="nav-label">Interview 02</div>
+    <div class="nav-name">David Kovel</div>
+    <div class="nav-role">Attorney, Kirby McInerney LLP &nbsp;·&nbsp; Former CFTC</div>
+  </a>
+  <a href="#szakonyi">
+    <div class="nav-label">Interview 03</div>
+    <div class="nav-name">David Szakonyi</div>
+    <div class="nav-role">ACDC Research Fellow / GWU</div>
+  </a>
+  <a href="#michelle">
+    <div class="nav-label">Interview 04</div>
+    <div class="nav-name">Michelle Kendler-Kretsch</div>
+    <div class="nav-role">ACDC Research Fellow</div>
+  </a>
+  <a href="#luong">
+    <div class="nav-label">Interview 05</div>
+    <div class="nav-name">Janice Luong</div>
+    <div class="nav-role">Policy Analyst, POGO &nbsp;·&nbsp; Washington DC</div>
+  </a>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- INTERVIEW 01: MICHAEL HORNSBY                                 -->
+<!-- ============================================================ -->
+
+<div class="interview-section" id="michael">
+  <div class="interview-header">
+    <div class="interview-num">Interview 01</div>
+    <div class="interview-name">Michael Hornsby</div>
+    <div class="interview-role">ACDC Research Fellow, Paris &nbsp;·&nbsp; Co-author, "Insider Risks in Polymarket Political Markets" &nbsp;·&nbsp; Former documentary filmmaker</div>
+    <div class="interview-meta">
+      <span class="badge badge-date">Pre-July 8, 2026</span>
+      <span class="badge badge-considering">&#9675; &nbsp; Camera: Deferred to Washington colleagues</span>
+    </div>
+  </div>
+
+  <div class="pull">
+    <div class="pull-tag">Key Quote</div>
+    <div class="pull-text">"It's rigged. I wouldn't say that on camera or in print. But people need to know these things are in various ways rigged. It's not a fair economic system."</div>
+  </div>
+
+  <div class="section-break">Transcript begins</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">What do you need people to understand about Polymarket? For the layperson who doesn't know anything.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michael</div>
+    <div class="line">Insider information is a feature on prediction markets. That's something people need to understand. People think of these as a way that the average member of the public has a fair shot at getting rich by essentially getting lucky. Like playing the lottery, a good bet on the stock market, getting into the right crypto venture at the right time. But all of these things are structurally designed to benefit other people. Insiders. People highly capitalized, highly professionalized. Whether it's the house at your casino in Vegas, Wall Street, the Trump family who own the crypto meme coin you're buying, or somebody in the government or the military on Polymarket. The people participating as the average person on the street are structurally set up to lose. You'd be mad to bet on these unless you really know what you're talking about or you have some kind of edge.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michael</div>
+    <div class="line">A lot of people do have that edge. We can't say for certain, but there's reason to believe that could be people in the military and the intelligence community. But it could also be somebody with a very expensive subscription to satellite live-tracking technology and imagery. They could look at a nuclear site. They might be at a space agency somewhere. They know something happened, the market hasn't moved yet, and they put their money on it. That's what we call information asymmetries. They're inherent to these markets. That's what makes them work.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michael</div>
+    <div class="line">My colleague Michelle, who wrote the report, was in Mexico during spring break and there was a kid in front of her putting money on the Iran bet. Insane, just on the face of it. But also, you can't monitor a situation closely enough to consistently win on these things. Studies show the concentration of profits on these markets is absolutely tiny. Something like 70% of profits going to 1% of accounts. Whether it's insiders or people who can see what insiders are doing and then copy those actions on the blockchain. If you're smart, you can set up bots to look for particular patterns. Copy those, throw thousands of dollars onto those bets because somebody seems to know what they're doing, and you make a lot of money.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michael</div>
+    <div class="line">On our next report, we look at how this happens in detail. Profit concentration among longshot bets. These are bets that shouldn't win that often, but they win a lot. Even within that, there's a tiny slice making all the money. They're basically tracking insiders and jumping on what they do. Think about someone loading bombs onto a plane on an aircraft carrier. That person knows what's up. Say they break the law and take the bet. They're certain something is happening, but how much cash do they have at their disposal? We set the threshold at $2,500 because if somebody is really confident, some people will have that sitting in an account. But then there are bets where people put on $10,000, $15,000, $20,000, mirroring those same activities. They're doing this across markets all the time. When they win, they win really big. Very small concentration of actually profitable winning traders, even among unlikely longshots.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michael</div>
+    <div class="line">It's rigged. I wouldn't say that on camera or in print. But people need to know these things are in various ways rigged. It's not a fair economic system. What gets very worrying is the military angle. National security implications. But it's also a lot of election trading. These are getting more and more concentrated. People are betting now on what the margin is going to be, what the turnout is going to be. There are tiny municipal elections in Eastern Europe with thousands and thousands of dollars bet on them. Obviously not by people from the town. We don't fully understand why. But it can move perceptions. These markets touch democracy, they touch national security.</div>
+  </div>
+
+  <div class="section-break">On bad actors and geopolitical outcomes</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">The difference with this now is that as opposed to just winning or losing money, this could have actual geopolitical outcomes. Bad actors could choose to act on something for profit.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michael</div>
+    <div class="line">That's the extreme case, but it's not impossible. More likely: if you want to do a stealth military attack, and the fact that it's about to happen is broadcast over Polymarket because the odds have moved and there are signs of an insider and then these big accounts start moving on something. If you're an adversary watching this and you think, people seem to think we're about to get hit tomorrow. From a US point of view, that's bad. That's not what should be happening. Whether or not people can manipulate real outcomes for their own profit, you'd have to be very high placed to have that power. But what we have with Van Dyke and those people: they were Pentagon. They were high up military. This is already happening. Maybe not directly manipulating like, I'm personally going to go catch Maduro. But there is some of that dynamic.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">I read about a journalist, I think it was in Israel, who reported accurately on strikes and received death threats. So it adds perverse incentives to truth-telling too.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michael</div>
+    <div class="line">Right. It adds perverse incentives to things that don't need additional perverse incentives. And one interesting thing we came across: in 2002 or 2003, DARPA wanted to build a prediction market to gather intelligence on Middle East instability. They wanted to build one of these things specifically to see signals from experts and then roll it out broader. Somebody asked: what if a terrorist was planning an attack and wanted to make money on it as well as carry it out? The people planning this said, well, that would actually be kind of the idea, because then we'd get signals that something was going to happen and we could act on it. That got shut down because it was a more sane political time and people said, what are you talking about? But there's a parallel to what now exists with Polymarket. It's registered offshore in Panama. Not subject to US regulations. The offshore platform includes markets on military events. Even if you start excluding certain categories, there are chains of events and consequences. Take oil prices: if you're going to blow up a ship in the Suez Canal, you take the bet on oil prices, because you know there's going to be an impact there.</div>
+  </div>
+
+  <div class="section-break">Congo parallel and the slush fund</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">The similarities you see between the Congo Holdup and what's going on here. The difference I see is between regulatory capture and regulatory deployment. Selig is defending and prosecuting states. That's active, not passive.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michael</div>
+    <div class="line">I haven't put much thought into how these connect or overlap. Congo is a really extreme example. The leverage they had over the regulator, which was the central bank in this case, was complete and total. There are whistleblowers from that bank who said when they called things out, they were literally threatened with weapons. But the pattern of state capture and kleptocracy is the end of the slippery slope. And unfortunately, that's the direction that a lot of this stuff is going in the US if you don't have independence. Because I get the feeling from the Selig thing: he can't really do anything because his boss's son is invested in these companies. And that's not that different a dynamic than the Central Bank of the DRC not being able to do anything because the president's adopted brother ran the bank. Was that the cash count? Yeah, something like that. You could draw the line.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">The word "slush fund" is what triggered it for me. They had the slush fund, and then I thought: what Trump is trying to do over here seems really similar. No oversight, no regulation, public money, and Trump and his friends and family get to use it at their discretion.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michael</div>
+    <div class="line">For that kind of parallel, there's a project called the Decleptocracy Project. I'll send you a link. It's a nonprofit that started looking particularly at Russia and Ukraine, that's their specialization, and now they focus a lot on the US and crypto corruption and that whole world of regulatory capture. They have a newsletter that goes out every few days with updates of what's going on. They're looking at what's happened in Russia and Eastern Europe and how similar models are rolling out here. Their website is still very Russia-Ukraine focused, but a lot of their actual work is US these days.</div>
+  </div>
+
+  <div class="section-break">What to watch on the Hill</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">Selig is supposed to respond to Elizabeth Warren's letter today. That's the deadline. What should I be looking out for? What do you think is going to happen?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michael</div>
+    <div class="line">Another person you can speak to is Janice Luong at POGO, the Project on Government Oversight. She's working with congressional offices on getting good legislation introduced, and hopefully passed, that actually gets to the root of the issue.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michael</div>
+    <div class="line">The thing to watch out for: there are lots of bills being introduced, there's a lot of activity, a lot of handwringing, but a lot of it doesn't get close to the heart of the problem. Watch who's signaling that they're doing something but actually doing nothing. The announcement of the house oversight investigation. I was on Squawk Box, I think, and immediately the Republican senator heading the committee said it's going to be hard. I don't think we're going to get agreement to do any real regulation, but what we should get is agreement for Congress members and their staff not to trade. They've already massively limited what the scope should be.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michael</div>
+    <div class="line">What POGO is calling for, what we're calling for, is to ban particular markets and have enforceable bans. Something on elections, on government actions, on military. Something that stops these things from happening rather than having to go after individual cases: was this person an insider, blah blah blah. That approach takes forever. It took six months to get the Venezuela case. Months for the Google person, even though it had been reported in the media. That approach plays into the hands of platforms and a CFTC that isn't interested in doing this seriously. And then there's Selig's solution: he established a group of the same people they're supposed to be regulating and investigating. That's his answer. It's the police policing themselves.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michael</div>
+    <div class="line">It's a classic playbook: having the platform come up with its own regulatory framework. American as apple pie. But the stakes are quite high on this one. It's bad with crypto, it's bad with social media. But with this one, there are quite serious real-world implications. It's all post-fact. We're going to ban people and investigate them if we see signs they shouldn't have traded. Damage is done. What we're looking for from our end is: what are the systemic risks you can't address by banning individual people or categories? What are all the other problems when you have elections on these platforms? How can they be manipulated? That kind of work is not just about policing insiders. It's about stopping these markets from existing. Because they're inherently manipulable. And they're plugged into CNN and appear as part of news reporting. Amplified and amplified again.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">Do you have any plans to come to the US? Would you be willing to sit down for an interview?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michael</div>
+    <div class="line">Maybe in October or something. But I have two colleagues in Washington who are amazing. One of the two authors of the report on Polymarket, David Szakonyi, he's an associate professor. And Michelle, who was at The Sentry. Incredible data investigator. They're both in DC. She did the 60 Minutes piece, he was also featured. They're the people you want for camera.</div>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+
+<!-- ============================================================ -->
+<!-- INTERVIEW 02: DAVID KOVEL                                     -->
+<!-- ============================================================ -->
+
+<div class="interview-section" id="david-bg">
+  <div class="interview-header">
+    <div class="interview-num">Interview 02</div>
+    <div class="interview-name">David Kovel</div>
+    <div class="interview-role">Partner, Kirby McInerney LLP, New York City &nbsp;·&nbsp; Former CFTC staff attorney &nbsp;·&nbsp; Represents commodities whistleblowers &nbsp;·&nbsp; Deep expertise in CFTC enforcement, cryptocurrency market manipulation, and event contract regulation</div>
+    <div class="interview-meta">
+      <span class="badge badge-date">Pre-July 8, 2026</span>
+      <span class="badge badge-confirmed">&#9632; &nbsp; Confirmed on camera</span>
+    </div>
+  </div>
+
+  <div class="pull">
+    <div class="pull-tag">Key Quote</div>
+    <div class="pull-text">"Suddenly everything that they were enforcing, now they're welcoming. It's a schizophrenia. It's a remarkable shift at the CFTC. Look up the New York Times article."</div>
+  </div>
+
+  <div class="section-break">Transcript begins</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">I don't understand how it's not insider trading. I don't understand how a person like Michael Selig, with his connections, is where he's at. I don't understand that no one has done anything about it other than Elizabeth Warren's letter. I don't understand how the CFTC went from 53 investigations down to 11. I don't understand that the only solution they came to was Selig forming a council of the same people they're supposed to be regulating and investigating. Is it so blatant? Is it so obvious? Somebody else has to see this, right?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Kovel</div>
+    <div class="line">I'm not going to be telling you much that it sounds like you don't know. I've worked with the CFTC for a long time. I know commodities markets. The CFTC has really not had much of a fit with prediction markets. In fact, under most administrations, prediction markets were very much frowned on, especially if they involve things that are public health risks or other kinds of risks. Gaming is supposed to be prohibited by the CFTC. There's a loophole that prevented the CFTC from enforcing provisions which would have allowed them to prohibit prediction markets around gaming. The Biden administration was trying to enforce its authority to prohibit gaming prediction markets. It lost for a fairly technical reason: they needed to do a rulemaking instead of relying on the statute. As soon as the Trump administration came in, they dropped that. The floodgates opened for prediction markets. The Trump family is affiliated with Kalshi and other prediction markets. And Selig comes from Wilkie Farr, whose main clients included, well, crypto.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Kovel</div>
+    <div class="line">All the cases involving crypto and prediction markets that were in front of the CFTC enforcement division were dropped. I had a number of cases dropped as soon as the Trump administration came in. Cases on behalf of whistleblowers.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">I'm trying to understand structurally how this agency can be run like this.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Kovel</div>
+    <div class="line">It's an excellent question. You should read the New York Times article about what's happened to the CFTC over the last year and a half. The entire Chicago office of the CFTC resigned. All the enforcement staff resigned a few months ago. These were the most senior, seasoned people who had been working to prevent cryptocurrency fraud and prediction markets from taking over. Those people are all gone. Suddenly everything that they were enforcing, now they're welcoming. It's a schizophrenia. It's a remarkable shift at the CFTC. Look up that article. That's more than I can say here.</div>
+  </div>
+
+  <div class="section-break">Geopolitical risk</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">What I'm coming to is that gambling as it stands doesn't have the impact of bad actors wanting something to come to fruition. Having a direct impact on geopolitical outcomes. That's the worst case scenario in my mind.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Kovel</div>
+    <div class="line">You can insider trade on sports betting, of course, especially if you're directly involved in the sporting event, especially in a one-on-one sport. But in terms of real public health problems with gambling, those obviously exist. Which raises the real open question: why would the CFTC, which knows nothing about gambling addiction or anything like that, suddenly be the sole regulator for gambling in the country? That's where it looks like things are going. These event contracts are considered swaps, and swaps are regulated by the CFTC. The CFTC preempts state law for the most part. Suddenly states that have been regulating gambling for years and prohibiting it are no longer in control. The CFTC has sued all these blue states that tried to enforce their own gambling laws.</div>
+  </div>
+
+  <div class="section-break">Wire fraud, Van Dyke, prosecution frameworks</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">The military guy, Van Dyke, he got busted on a wire fraud charge. That's what they could come up with. There's no law for this now. The financials are moving faster than the legislation.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Kovel</div>
+    <div class="line">Wire fraud is not uncommon as a prosecution vehicle. It's usually an underlying violation, and wire fraud covers anything that happens through the wires related to that underlying violation. Wire fraud has a 10-year statute of limitations. It's also an easier criminal violation to prove. So often when there's a commodities or securities exchange violation, criminal prosecutors will use wire fraud. That's pretty standard.</div>
+  </div>
+
+  <div class="section-break">DraftKings vs. Kalshi, states vs. CFTC</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">DraftKings had to be regulated by the states. Kalshi especially is saying: no, we're not gambling, we're in an event contract, we're not regulated by states anymore. And they're winning.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Kovel</div>
+    <div class="line">Yeah, it's going to go to the Supreme Court soon. The gambling industry doesn't like prediction markets. Those are two very different groups. Prediction markets are stealing market share from companies that successfully got sports gambling approved, as well as casinos and tribal interests. The entire gambling industry sees prediction markets as a threat, not a partner. So yeah, there are some similar arguments being made, but prediction markets are trying very hard not to be seen as gambling, because then they antagonize a much larger group of special interests. Not just people concerned about insider trading, but the entrenched gambling incumbents who are going to lose money when there's more competition. The gambling industry had to agree to regulations and revenue sharing with states over the last decade in order to get approved. Kalshi and prediction markets want all that without the obligations.</div>
+  </div>
+
+  <div class="section-break">Selig, regulatory capture, the 50 briefs</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">My argument is that unlike the Congo where it was regulatory capture, this is regulatory deployment. Selig is like a bulldog. He's from the industry, used to work for crypto. Does it seem like he's setting up the field in favor of the new Truth Social prediction platform?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Kovel</div>
+    <div class="line">I still think it would be capture. We would talk about the capture of the state by private interests. He's an industry stalwart. There are members of the presidential family that are invested in these companies. There's some forbearance going on. They're not enforcing the law as it's written. They're intervening to provide leniency or even impunity to both crypto firms and prediction market firms, because they want a really lax regulatory environment for these companies to make money. So it is still capture. What they're trying to do is not necessarily tilt government money toward these companies like you see with SpaceX or Palantir. They're trying to have the laws not enforced as they're written by Congress, or have regulators be unable to pass rules that would rein in this industry. And that's still indicative of capture. Because you're getting the government not to do something.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">But he's also going after the states. He's filed 50 amicus briefs against state attorneys general. That's more like an attack dog.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Kovel</div>
+    <div class="line">That goes back to the states vs. DC question. Where should the regulatory power be allocated? I think ultimately the Supreme Court will have to weigh in if the states don't give up. But I see that as money: the states want to regulate because they want control over the revenue that comes in. A lot of them are quite dependent on gambling revenue. That was part of the bargain a couple of years ago when these deals were struck, and they're very threatened by this. There's also the tribal interests that are very active and vocal on this because they don't want to lose their share. It's being pitched as states' rights, but at the end of the day, it really comes down to money and who's going to be able to benefit.</div>
+  </div>
+
+  <div class="section-break">Insider trading and market integrity</div>
+
+  <div class="exchange">
+    <div class="speaker guest">Kovel</div>
+    <div class="line">One of the big debates is whether these markets, Kalshi and others, which are required under the Commodity Exchange Act to ensure their markets aren't susceptible to manipulation: are they really doing their job? Almost by definition, some of these contracts are designed to be manipulated if you consider insider trading to be manipulation. Which I do. That's a big debate amongst the commodity exchange geeks.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Kovel</div>
+    <div class="line">There's a famous economics article from a long time ago about the orange juice futures market, arguing that orange juice futures did a better job of predicting weather in Florida than actual weather services did. The argument: when you put money on the table, people do more work to be right, and you get a more accurate result. The most extreme people from the Federalist Society will say insider trading is actually good for the market because it gets you closer to the right answer sooner. I do not subscribe to that view. I think it's really problematic. But the argument for prediction markets is the same: the information flow is better, more efficient, and you end up with better results. I think to a large degree that can be true. But then with event markets, where the binary outcomes involve people who have complete control of the information or early access to the information, it's just nuts. And some politicians are setting up prediction markets on their own actions. George Santos. Nobody's even surprised. But from even the most extreme perspective, nobody thinks that's a good thing.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">The US government under DARPA in 2002 was planning essentially the blueprint for Polymarket as a Middle East prediction network to predict terrorist acts. They canceled it because it would incentivize terrorism. Twenty-five years later, we have an unregulated, unsupervised, offshore market doing the same thing.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Kovel</div>
+    <div class="line">The statute is clear: the CFTC is supposed to regulate these markets and prohibit certain kinds, including those involving war, assassination, and gaming. They just haven't. And now it's sort of fair game, because the Trump administration is not going to do the rules that would be necessary to prohibit these things.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">If somebody pays attention to this project, would you sit down for a formal interview, with someone better than me asking questions?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Kovel</div>
+    <div class="line">I really enjoy talking to you and I'm really glad you're interested. I'm really happy to talk with you again. I would seriously consider it. I gotta make sure that you're not a weirdo. I'm getting everything happening right now. I have to refresh every day with whatever Warren comes out with. Speaking with you guys has been awesome. You've really helped me understand this from a different angle. I didn't want to believe what I was believing, but I guess it's like that.</div>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+
+<!-- ============================================================ -->
+<!-- INTERVIEW 03: DAVID SZAKONYI                                  -->
+<!-- ============================================================ -->
+
+<div class="interview-section" id="szakonyi">
+  <div class="interview-header">
+    <div class="interview-num">Interview 03</div>
+    <div class="interview-name">David Szakonyi</div>
+    <div class="interview-role">ACDC Research Fellow &nbsp;·&nbsp; Associate Professor, George Washington University &nbsp;·&nbsp; Co-author, "Insider Risks in Polymarket Political Markets" (April 30, 2026)</div>
+    <div class="interview-meta">
+      <span class="badge badge-date">Pre-July 8, 2026</span>
+      <span class="badge badge-confirmed">&#9632; &nbsp; Confirmed on camera</span>
+    </div>
+  </div>
+
+  <div class="pull">
+    <div class="pull-tag">Key Quote</div>
+    <div class="pull-text">"There are hundreds, but not thousands of people that we think are trading on privileged information, and the way they behave on the blockchain makes it very feasible for investigators to follow up and bring them to justice."</div>
+  </div>
+
+  <div class="section-break">Transcript begins</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">For someone who's never heard of Polymarket and what's going on, why should we be interested? Why should we care?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">These platforms are growing in volume and activity by the day. Even if you haven't heard about them by now, you will in the next six to nine months because there's just so much money being bet and so many Americans, even people around the world, taking part in this. The reason to be potentially concerned is that these platforms are potentially highly tilted against the average user in a variety of ways, depending on what market you're looking at. If we take the military and political ones, there's all this room for insiders or elites or even lawbreakers to win money from regular users. There's no house or bookie. It's an access thing. These platforms are potentially fundamentally unfair. They're being marketed as opportunity, as a way to get rich, as a way to actualize your take on the latest events. When in reality, the way they're constructed and the way they're regulated allows a very small number of people to profit at the expense of the mass of users. In that way they share some qualities with Ponzi schemes. A small group of people reaping all the benefits while other people are misled about their chances.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">I think that's really concerning because these markets live on the money being bet. Then there are ethical questions about whether we as a society want to encourage people to bet on every element of our political environment. Where do we draw the line? The ones that affect government and politics and the way our country projects power around the world, they're quite sensitive. There are real human losses oftentimes at the end of that bargain. The fact that we're encouraging people to bet money on those outcomes is, from an ethical perspective, potentially questionable.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">This falls into a couple different trends: tech companies breaking something and then getting caught and us scrambling to catch up. Moving fast and breaking things in this case would be how we bet money online. And just the latest dimension of gambling entering the normal daily function of the American citizen. One more offering, easy on their phone. And where they potentially lose their life savings. There's not really that many people looking out for their interest because these companies have been allowed to really do what they like for the time being.</div>
+  </div>
+
+  <div class="section-break">On insider trading</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">So essentially insider trading is built into this. You can't have it without insider trading.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">No, I wouldn't say that. There's potential insider trading in any type of market, whether it be equity markets, bond markets, or this type of market. In those first examples, we have the SEC and a set of investigators tasked with preventing that from happening. To be quite frank, they've really failed in their mission to prevent insider trading over the last couple of decades and have not brought white collar criminals to justice for this behavior. So the stock market can function without insider trading. We don't like it happening. We're doing our best to stop it, but it's still happening. Something similar is probably going on with prediction markets: there's a lot of potential for insider trading, the regulatory framework is really weak, and it's hard to monitor and punish. Therefore it's making headlines because it's so apparent. And it's using classified information and laws are being broken that relate to national security versus just company insider sharing. The outcome is much more detrimental. If there are adversaries in the United States and they can pick up classified information from these markets being shared illicitly so individuals can make a quick buck, adversaries can change their behavior or respond. That's one of the big fears: if we don't step in, our military is at risk and our foreign policy establishment isn't as secure as it should be.</div>
+  </div>
+
+  <div class="section-break">Sports gambling vs. prediction markets</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">In your research, have you found a parallel between the groups who successfully deregulated sports gambling and the people lobbying to deregulate Polymarket?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">They don't like each other. Those are two very different groups because prediction markets are stealing market share from the companies that successfully got sports gambling approved, as well as casinos and tribal interests. The entire gambling industry sees prediction markets as a threat. Not a partner. Prediction markets are trying very hard not to be seen as gambling because then they antagonize a much larger group of special interests. I've seen very little evidence that prediction market companies are cooperating with the gambling industry. It's all one pie they're slicing up. The gambling industry had to agree to regulations and revenue sharing and all that other stuff in order to get approved in most US states over the last decade. By being treated as a commodity, prediction markets bypass all of that.</div>
+  </div>
+
+  <div class="section-break">Selig and regulatory capture</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">Without trying to point in one direction or another, Selig is very tied to crypto, to specifically Trump's family.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">Yeah, and that's a charitable way of saying it. He is somebody who has actively promoted crypto in his past and sees a supportive role for the US government in helping the crypto industry. They went down from enforcement from 58 cases in 2024 to 13 cases last year. So yeah, that tracks.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">My argument is that unlike the Congo where it was regulatory capture, this is regulatory deployment. Selig is more like a bulldog than a captive. He's from the industry, he used to work for crypto, and he seems to be setting up the field in favor of the new Truth Social prediction platform. What do you think?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">I still think it would be capture. I think we would talk about the capture of the state by private interests in the US standpoint as well. He's an industry stalwart. There are members of the presidential family that are invested in these companies. There's some forbearance going on. They're not enforcing the law as it's written, and they're intervening to provide leniency or even impunity to both crypto firms and potentially prediction market firms, because they want a really lax regulatory environment for these companies to make money. So it is still capture. But what they're trying to do is not necessarily tilt government money toward these companies like you see with SpaceX or Palantir. They're trying to have the laws not enforced. That's still indicative of capture. Because you're getting the government not to do something.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">But he's also filed 50 amicus briefs against state attorneys general. That's more like an attack dog.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">That goes back to states versus DC. Where should the regulatory power be? Ultimately the Supreme Court will have to weigh in if the states don't give up. But I see it as money. The states want to regulate because they want control over the revenue. A lot of them are quite dependent on gambling revenue. That was part of the bargain a couple years ago when these deals were struck and they're very threatened by this. There's also tribal interests that are very active and vocal on this. It's pitched as states' rights, but really it comes down to money and power and who's going to be able to benefit. And that's what we have at the state level. So it's not unprecedented that states would want this. It's just that there's huge conflict about whether it should be treated like gambling or like a commodity.</div>
+  </div>
+
+  <div class="section-break">The Iran moment and the eureka realization</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">When you were looking at your screen, the Iran moment: what did you see? And when did you know what it meant?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">My colleague Michelle was really doing the real-time analysis of the data and had the eureka moment with the Iran situation. She's the best person to ask that question. I'm talking with Michelle tomorrow, you said?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">Yes.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">Good. I think my own eureka moment came about six weeks before we ran the data, when I thought: let's go see how prevalent this is. Are we talking about dozens of cases, hundreds of cases? Billions of dollars? How tilted is this playing field and how active are these insiders? And are there ways to use the publicly available data that Polymarket, at least in its international platform, provides? You can't really do that with Polymarket US. But with the offshore platform, they put everything on a blockchain that can be downloaded and analyzed. So there's all this potential for research groups and academics to go in and see how the whole system works, rather than just what's going on in one specific case. When you talk to policymakers, when you're trying to fix the problem, you need more than one case. People can write it off as an anomaly. They want to know the real systemic risks. And there was data to do that. That was my revelation. That we can actually observe everything happening on these platforms and dig in instead of just speculate.</div>
+  </div>
+
+  <div class="section-break">Coplan and the FBI</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">Right before the 2024 election, the FBI showed up and took Polymarket CEO Shane Coplan's phone. Trump won. After that, the investigation seems to have disappeared. Do we know what the significance of that is?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">No. It would have to come out of a congressional investigation, about the ties between the US government, pre-Trump and under Trump, and how the government has approached this subject. What kind of contact with special interests, what we know about why certain decisions have been made or not made in terms of reining in the industry. There could be a whistleblower out there or a leak that's out there, but I haven't seen anything in the public sphere that really tells that full story. There are just too many unanswered questions.</div>
+  </div>
+
+  <div class="section-break">The pattern from other countries</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">You spend your career studying how power captures institutions. Russia, Congo, Germany, and now the US. When you look at what's happening with these markets and the people in power benefiting from them, are you using the same framework? Are you seeing a pattern you've seen in other countries?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">Yes and no. We don't know enough about the people engaging in insider trading to be able to point the finger squarely at high level political elites who are abusing their access to information. We suspect that's going on, but we have no names because almost by construction, these platforms are anonymous. Where the similarities really start to kick in is that the companies making a ton of money and looking the other way are highly politically connected and are able to use their influence to avoid the type of scrutiny that hopefully other democratic nations are going to be applying in the next year or two.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">There's this protection element growing in the American political economy where people with immediate ties to the administration, through campaign donations or familial connections, are able to get preferential treatment and skew the market and make more money. That's something you observe in all types of what we might call weakly institutionalized countries around the world where institutions are captured or undermined or very poorly enforced. And here's what's interesting: all this is happening in America that is supposedly anti-Communist, anti-Socialist, so antagonistic to the idea of government intervention in markets, at least publicly. Yet it's allowing certain well-connected players to have their way inside government. Which is basically one of the fundamental problems of that type of approach. There's this hypocrisy: a small group of companies and families are making a ton of money because of either corruption or just being able to buy influence within the government.</div>
+  </div>
+
+  <div class="section-break">The solution: ban the markets</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">In your research, you say one of the few ways to get this under control is to either identify the people making the bets or completely eliminate the category of political betting. How would that change the influence these markets are having?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">We always come down first on the idea of getting rid of the markets altogether, because policing insider trading is all but impossible. Just because you ban a certain category of people you think might have privileged information doesn't solve the problem of insider trading because it could be one or two or three degrees removed. Yes, we want transparency, but transparency is not the end. We really want to get the markets out, because there are just too many stumbling blocks and too many different ways people can find loopholes as long as those markets exist.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">The research is still out on whether prediction markets can provide a higher quality source of information about where the country is headed. That's what they say they contribute to society. I'm still open to the possibility, very frankly, that for things like elections or even sporting outcomes, you can aggregate information, crowdsource it, have people back it up with their personal finances. I could be convinced that would produce a more informative output. But I really want to emphasize that those benefits are confined to a small set of markets where no one can control the outcome and no small group of people have insider access to what's going to happen. On anything where there could be an insider skewing things, you're going to have problems of abuse and manipulation and inequality. And I just don't think we need that. More people are hurt than benefit. Just from a cost-benefit perspective.</div>
+  </div>
+
+  <div class="section-break">What's coming next</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">What's next in your research? What do you have coming up?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">Our immediate term is to follow up the report we did a couple months ago and talk about following the money. What can the blockchain tell us about who and what types of people are insider trading? Where does the money go after it's won? And how might dogged investigators who really care about the subject pursue these cases? That should be out in the next couple weeks. It's not as eye-opening as the first one, but it has this important perspective that we need: there are not that many people that we think are insider trading. Hundreds, but not thousands of people that we think are trading on privileged information. And the way that they behave on the blockchain makes it very feasible for investigators to follow up and bring them to justice. That's kind of one of the points of the article: we could be doing a lot more. And this is happening, and this is what it looks like.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">And then I think the rest of the year we're going to be focusing on elections and the risks that prediction markets create for the midterms, from a variety of different angles. Trying to shine a light on how prediction markets potentially undermine electoral integrity and can create opportunities for candidates, or at least allow people to contribute money into the political environment in this roundabout way that can be very effective in skewing outcomes. Thinking more about prediction markets from a money-in-politics perspective, as well as insider trading. Why might we not want prediction markets to play a big role in American elections? Because that's going to be the big issue in the next three months.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">I think this is such a fascinating thing that people are just completely ignorant towards and it's dangerous. Legit a dangerous thing.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">David S.</div>
+    <div class="line">Obviously I'm happy to be on camera if you need me. We want to support all this work. Just let us know how we can help.</div>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+
+<!-- ============================================================ -->
+<!-- INTERVIEW 04: MICHELLE KENDLER-KRETSCH                       -->
+<!-- ============================================================ -->
+
+<div class="interview-section" id="michelle">
+  <div class="interview-header">
+    <div class="interview-num">Interview 04</div>
+    <div class="interview-name">Michelle Kendler-Kretsch</div>
+    <div class="interview-role">ACDC Research Fellow &nbsp;·&nbsp; Former Deputy Director of Investigations, The Sentry &nbsp;·&nbsp; Lead data scientist, "Insider Risks in Polymarket Political Markets" (ACDC, April 30, 2026) &nbsp;·&nbsp; 60 Minutes (2026)</div>
+    <div class="interview-meta">
+      <span class="badge badge-date">July 8, 2026</span>
+      <span class="badge badge-confirmed">&#9632; &nbsp; Confirmed on camera</span>
+    </div>
+  </div>
+
+  <div class="pull">
+    <div class="pull-tag">Key Quote</div>
+    <div class="pull-text">"When we started our work on insider trading, we said we don't care about elections. And now it's all we can think about, because we're just learning more and more about the platform, how it can be exploited, how it can be abused. It's terrifying."</div>
+  </div>
+
+  <div class="section-break">Transcript begins</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">The Iran moment. When you were watching that screen, take me to it.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">Before January, I didn't know Polymarket existed. We've done all this work, but all of it was really new to me. Sports betting, of course I knew existed, but I'd never been on a sports betting app. In some ways, you're really watching for the first time people that you knew existed, but they're betting on the world. And I have a master's in international security policy. I've studied war for a long time. There has always been, especially in the US, a separation between what the military is doing over there, because it's not on US soil, and what regular humans are reading in the news. I really came of age in the Bush era. So to just watch what seemed like regular humans bet on war felt like this undoing of a divide.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">But at the same time, I was watching, and these numbers were telling me it was going to happen. Because there's this pit-of-your-stomach feeling. When you're learning something new, you're always trying to gut-check yourself. Maybe I just totally don't understand how this works. That was my genuine feeling. I sort of made a joke about, like, I should put money down. This sense of: am I understanding Polymarket correctly, or is this all a facade of my own understanding? And then I have a one-year-old, and she was up at 4 o'clock in the morning or whatever, when the news came in real time. We struck Iran. And just, in some ways, I'm like, oh, I understand Polymarket. And oh, shit.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">It doesn't take an expert to see what I saw. Anyone with enough intelligence background could see it. And that's not how the world works. The world works in secretive missions and all this time and energy because we've shown in war that secrecy and the element of surprise. That's from grad school. The element of surprise is everything. And you've ruined that on Polymarket? There's just this disconnect between regular people and the world of military affairs that I couldn't really process. It was utterly shocking.</div>
+  </div>
+
+  <div class="section-break">After Iran</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">So after you saw that and you're shocked, how did you process it? Who did you tell? What was the next thing you did?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">I told my husband I was right. Of course.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">When we stumbled into Polymarket as an organization, I'd never worked on sports betting or anything adjacent to this. There was this sense that if there's insider trading, if there's military secrets exposed, if there's people using this platform in this way, it's going to be obvious. That was the first thing that really triggered in my mind. So prior to the strikes, I was actually doing fancy mathematical models in my notebook saying: if they're trying to hide their steps and do all this complicated stuff to make money on Polymarket, they would do this, and this, and this. And there was somewhat of a relief of, like, oh, this is just going to be obvious. We don't have to make any fancy models. We can just try the easy way. Because in some ways, when you're living in an environment of impunity, like in this administration, you can get away with the obvious. You don't have to work so hard. It's going to cost you money to do it the complicated way.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">So the longshot analysis, which was a very simplified way of thinking about insider trading, was just: people making really big bets in the open, obviously not trying to move markets and prices. That was the right direction because of how obvious it was. But also a sense of urgency. Let's pull the data. Let's do this big work. Let's really try to get this published. We started the work because of Venezuela. Then Iran was our "okay, this probably happened twice, and if it happened twice, it's probably happened before, and we need to report on that." There was urgency to all of it. But also a sense of: this isn't going to take us a year. We can do this quickly because it's really obvious.</div>
+  </div>
+
+  <div class="section-break">The three-flag system</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">So you built the three-flag system. How can you tell what's a real signal from the noise?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">At the time, I was looking at all these markets for whether there were insiders. Not just military markets, but also the famous Google case, the one who was recently charged. There were the ones around the Nobel Peace Prize, which was not insider trading. That was a more complicated situation. I was looking at all of them. And the honest truth is, every one of them is different. Because in general, these people are not sophisticated financial actors. If you look at Wall Street, these are people who understand financial markets, prices, how to manipulate things. This is some guy who stumbles upon the temporary website for the Nobel Peace Prize, and what he does is very different from how a member of the military with insider knowledge of Venezuela is going to respond.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">So I actually had 20 different models because none of them were quite right all the time, because the behavior was different. The amount of money people had was different, and that makes a big difference. We've seen insiders who probably have $5,000 of cash. That's all they have to trade, even if they're certain of the outcome. And how they respond compared to someone who has access to $40,000, $100,000 is very different.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">The three models we ended up publishing are not the ones I think are bulletproof. But they show the sense of how it's a mixture between human behavior and how the platform actually works. If I want to trade, I can't just trade. I have to find a partner on the other side of the trade. And that complexity means we don't get to see exact human behavior. We see what Polymarket can actually match up in real time. Those were the three that were the easiest to explain, because we wanted people to understand what's actually happening. Before this, in my first career, I was a maths teacher. One of the big things I learned: you have to show somebody three different ways of doing something. Longshots, price acceleration, timing. Hopefully that worked. But that's where it really comes from.</div>
+  </div>
+
+  <div class="section-break">The 18% number</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">Everybody got stuck on the 52% win rate. But what I think is the crazier number is 18% of the military wallets hitting 90 to 100% success on longshots. Against an 11% baseline. That's insider trading through and through, isn't it?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">Yeah, and I think it's twofold. Our upcoming research gets into more of this. If you have one insider, everyone can see that one insider. Particularly in military markets, when you actually dig into the wallets making these longshots, there are some that have got millions of dollars at their disposal, running around in crypto and sports betting and whatever. They're probably not a military insider. But they're winning on military bets all the time, because before them there is this little minnow who shows up, makes this really outrageous bet, who has no history on Polymarket, who probably has every dollar they have in the world on this. And so I think the success rate in military markets is not only evidence that there are insiders, but that insiders have this ripple effect.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">The legal risk falls on the actual insider. They are committing a crime. The people who are actually profiting aren't committing any crime. But they're making tenfold, hundredfold profits compared to the smaller actual insider, just because they've got capital. In some ways, this is a continuous depiction of American inequality. The transparency of the platform has some real risks. It's great for research. But the ripple effect into the whole market is real. There are other studies I've looked at on how few people make money on Polymarket, and how much money is made by the top 1%. It's not equal.</div>
+  </div>
+
+  <div class="section-break">DARPA and the Facebook parallel</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">DARPA came up with something very close to Polymarket in 2003. They shut it down in 48 hours because they knew by logic that anybody who could profit off an act of war would have a financial reason to enable it. Twenty years later, we have the same prediction market functioning overseas with no oversight. What happened? How do you process that?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">It's interesting because I first learned of prediction markets studying economics in undergrad, because there had been these economists who built prediction markets essentially as polling for elections. When you put money on the table, you're more honest. They were finding it was outperforming polls, with people putting in $5 or $10. Polymarket has this essence of: we are the truth. And to me, my grandfather is military and I've sort of grown up in that environment. Military secrets are secrets for a reason. That's how you win wars. Yes, I agree with Polymarket's stance that they are telling the truth. But the DARPA example says there are certain truths that people just don't need to know.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">I always use the Facebook example. Mark Zuckerberg's whole vision was connection. Beautiful idea. Real benefits: kids with disabilities in small towns who don't have friends with similar situations. But he also created connections that literally drove a genocide in Myanmar. Because he connected people who wanted to do that. And that is where governments have a place in stopping ideas from running amok. That's DARPA saying: this idea ran amok, we're going to stop this. In today's world, the average age of the Senate: I don't know if they know how to place a bet on Polymarket. You have to work on crypto, you have to download an app, you have to do all this stuff. The technology was more powerful than the understanding to regulate it, and government didn't have that function. I think Polymarket is very similar.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">I'm starting to fail to name markets that should be allowed on Polymarket anymore because you see insider trading in everything now. But I feel like there was a time and place where there was a much better understanding of how things could run amok, and something prevented it. Over the last few decades, tech has become its own government in some ways. They sort of rule by their own rules because they're the only ones who understand the power. AI is its own beast. I would not be surprised if we don't have the same reckoning with Polymarket and Kalshi as we did with Facebook, after Cambridge Analytica, after the Myanmar crisis. We've been through this before. The talk is really strong, and people really want to believe it, but it has nothing to do with what's really happening behind the scenes.</div>
+  </div>
+
+  <div class="section-break">Congo, regulatory capture, and Selig</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">When I was reading the Congo papers, I saw a real parallel between the captured regulator and what's going to be the US sovereign wealth fund and Trump. The difference I see is that what's going on here is more regulatory deployment as opposed to capture. Selig is like a little bulldog now. David didn't agree with me. He said it was still regulatory capture. But I see it as more active.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">The capture question is really interesting. And this is where, the one benefit I have in doing this work, having never really predominantly worked on the US, is that so much of what's happening here feels like it's nearing behaviors you see in really captured kleptocracies. Like South Sudan, where the presidential family is just rooted in all aspects of the economy, from oil to banking. There was a case where they were going to make visas electronic, and some proceeds were going to the presidential family. And it was just like, of course that would happen. When you actually get into the nitty gritty of how that operates, a lot of it is incompetency. And sometimes purposeful incompetency at regulatory institutions. It's really tricky to say what's captured, where you have somebody actively defending the position of a presidential family versus what's sort of everyone just going along with the status quo and not pushing back and there's just not any regulation happening.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">My understanding is that Donald Jr. is involved in both Kalshi and Polymarket. I don't know to what degree. But it's clear that Kalshi's big positioning is: they're okay, Polymarket's the problem. And Polymarket just doesn't talk to anybody. It's sort of like, if we stay silent, we can't say anything wrong, and they'll just let us go through. I don't have a full stance on the question because I don't know the ins and outs well enough. But I do think there is this thread: everyone is incompetent because no one truly understands it. And that allows anyone to win the argument. When there's no standards and no truth, that's when the capture concept is even possible. It's not obvious anyone's doing anything wrong. Yet. Always a debate. And that is very much, to me, like captured regulation.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">Certain elements of it feel really like when Central African Republic tried to go into cryptocurrency. Like, no one knows what they're doing and these experts come in and tell them what to do and they're like, that seems fine. I don't even know if the White House has a stance on any of this. The actual White House. They haven't said yes, they haven't said no, they haven't pushed back. They just chilling. Which is really intriguing.</div>
+  </div>
+
+  <div class="section-break">After 60 Minutes and Congress</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">DARPA got killed. Selig, amicus briefs in 50 states. He went from 96 cases to 13. 60 Minutes. What happened after it aired? Did anybody reach out to you? Did Congress call you?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">We've been talking to some Senate and House offices who are working on the major bills. I think our big question for all of them is: the 52% clicked. It's very rare that in complex statistical analysis, the general public really understands something. When we published the paper, I didn't see that coming. I'm so used to doing big math things and people saying, I don't understand a word of what you said. And I'm like, that's fine, just trust me. We had captured a number that people could use, and people understood what it meant. So we've been working on the Hill saying: what other numbers would be convincing? What are people worried about? What do they not know? Do they not know how much money is in these prediction markets? Do they not understand it's covering 96% of primary races? 60 Minutes elevated it to the point where people over the dinner table understand that this is happening. There are a lot of agnostic views around prediction markets in Congress, other than from states that have the existing sports betting regulatory structure.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">We're working on some election stuff because I am terrified for the elections. We worked on a piece with the Irish Times, and that one: wasn't that money laundering? I just read that, and I was like, wait, money laundering now? It's funny because we didn't even think about it until the Irish Times was like, this guy Gerry Hutch, is he money laundering? And I'm like, can you money launder on this thing? We still don't know what happened. But it's weird. That's all I know.</div>
+  </div>
+
+  <div class="section-break">AI bots and the elections threat</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">The money laundering angle and the AI bots. Does this make it harder for you to track who's really the bad guy? Because the bots would...</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">You don't know if someone's an insider unless you know who they are. And only law enforcement can do that. Only law enforcement. The immense frustration from my end is: how close can I narrow down to the smallest pool of people where I really think these are insiders? And then I still don't know.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">The bots are interesting because in some ways they're looking for insiders. So you can use that to reverse engineer: here are these bots doing this stuff, who bet before that? What happened before them? That doesn't mean there are insiders, but I'm also very aware we may be wrong about how to find insiders. There may be different models. So the bots are somewhat helpful. But they're like two thirds of trades. They're obnoxious. Really obnoxious.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">What I worry about with the elections is it's not that much money to put into a race to get the bots to move, to make it seem like something is happening. Think about Al Gore. If you had prediction markets back then and somebody put $1,000 down, not talking a lot of money, those bots go into play and suddenly all those people thinking, should I vote third party? Now they all vote third party. Now you have an even bigger crisis on your hands. The bots are very interesting because they're amplifiers. If you think about elections as campaign contributions, and you have a multiplier effect by bots, now you can invest a little amount that looks like a lot of amount on a candidate, and none of that counts toward your campaign finance limit. What is it, $5,000 max per individual? And that's before we talk about foreign money in elections, because nothing's stopping any foreign country from doing this.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">This comes back to Facebook and Cambridge Analytica. We didn't understand the power of Facebook in the 2016 elections. The Russians did before us, and they took advantage of that. I'm not saying it's going to be the Russians. I'm just saying that if I'm a foreign country and I want certain people to win in these midterms, I would absolutely look at Polymarket and Kalshi right now. Cheap, cheap. And no attribution whatsoever.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">That's crazy. I just got goosebumps. That's crazy.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">And when we started our work on insider trading, we said we don't care about elections. And now it's all we can think about, because we're just learning more and more about the platform, how it can be exploited, how it can be abused. It's terrifying.</div>
+  </div>
+
+  <div class="section-break">The next report and the elections</div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">The next work coming out is still on the longshot. Spending more time trying to pin down who the insiders are. But in the background, we're doing a lot of election work because it's important on the Hill, and we want to set ourselves up for the midterms. We want to watch it in real time as it's all happening. We're doing initial analysis on elections in France and other countries, just to learn. We did the Irish example. And Romania.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">$371 million on a single election. And they banned the whole platform. But here, we're betting on military strikes and it's cool.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">Romania is in a position to take a stance on it. But one point five million dollars on the Seychelles presidential election. They spend like $30,000 on their election as a country. The ratio of their campaign financing to the amount spent globally on their Polymarket. And these aren't all from the Seychelles. I think some of these have meme ability. Reddit memes influencing foreign elections in countries that are barely stable democracies. This is just election integrity beyond truly malicious forces. This is just dumb kids. And we're just in such a fragile state. Polymarket likes to be completionists. They like to have all the candidates, all the races, because of course there's more to bet on. But in many cases, some people are just on the ballot, but they shouldn't be in a prediction market because they're just not viable candidates. The more you dig in, one: the less I know. Two: the more you see the flaws and see nobody figuring out what to do about it. Romania is a good example but there's actually nothing stopping Romanians from betting via VPN.</div>
+  </div>
+
+  <div class="section-break">On being filmed</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">If somebody were to take me seriously and want to get a proper film crew, would you be cool to be filmed?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">Yeah, yeah, we do it.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Michelle</div>
+    <div class="line">The more people that understand, and a film on it, it's so necessary. I'm so scared that in 10 years, every HBO documentary will be on this. That's the tricky thing. People make documentaries about something that happened 10, 15, 20 years ago. This needs to happen now. It's a great story.</div>
+  </div>
+
+</div>
+
+
+<!-- JANICE LUONG -->
+<div class="divider"></div>
+
+<div class="interview-section" id="luong">
+
+  <div class="interview-header">
+    <div class="interview-num">Interview 05 &nbsp;·&nbsp; July 9, 2026 &nbsp;·&nbsp; Phone</div>
+    <div class="interview-name">Janice Luong</div>
+    <div class="interview-role">Policy Analyst, Project on Government Oversight &nbsp;·&nbsp; Washington DC &nbsp;·&nbsp; The Fixer</div>
+    <div class="interview-meta">
+      <span class="badge badge-confirmed">&#9632; &nbsp; Confirmed on Camera</span>
+      <span class="badge badge-date">Entry via Michael Hornsby</span>
+      <span class="badge badge-date">First conversation &nbsp;·&nbsp; July 9, 2026</span>
+    </div>
+  </div>
+
+  <div class="pull">
+    <div class="pull-tag">Key Statement</div>
+    <div class="pull-text">"Romania had a good call, that we should ban these markets. That is not POGO's position. That is my personal position."</div>
+  </div>
+
+  <div class="section-break">Pedro's introduction and project framing</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">I'm a cinematographer, not a journalist. I've been doing documentaries and reality TV for twenty years. I started seeing my friends betting on DraftKings and thought it was interesting. I started doing some research, stumbled into Polymarket and this world, and I was fortunate that some serious people took me seriously and talked to me. I'm not trying to be political in any way. I'm following the instruction that Michael Hornsby, David Kovel, and a researcher I work with gave me: follow the money. So wherever it goes, whatever you feel comfortable answering, please do. I did my research. Your work with POGO is interesting to me because it draws similarities to what happened in the Congo with regulatory capture. That's where I'm drawing the premise of the whole slush fund angle, the Trump administration's connections to Polymarket and Kalshi through his son.</div>
+  </div>
+
+  <div class="section-break">Forbearance and the directed agency</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">I keep hearing the word forbearance as an active choice to not enforce the laws on the books. The CFTC's caseload went from 58 cases to 13 in a year. Does POGO's model account for an agency that was pointed on purpose, or one that just drifted?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">It's really difficult to prove whether there is some intention to not enforce the rules and the law. Structurally, to begin with, the law governing prediction markets is quite broad. Right now the CFTC is making all kinds of overreaching assertions, such as whether it has exclusive jurisdiction. That is currently being litigated. The classification of event contracts, whether those belong in swaps or not, that's also being litigated. So right now we're really trying to find answers within such broad language and seek clarification. That gives the CFTC a lot of room to work with on the regulatory side.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">Now, they are taking accountability steps. They're charging people. There's civil action against a U.S. soldier that was recently charged for trading on these markets. There's also a Google employee charged with wire fraud. So they are taking some important steps. However, there's another element. Their interests might not reflect the public's. If you look at the CFTC's Innovation Advisory Committee, the membership list is mostly private interests. That tells you where their innovative interests lie. And in different committee hearings, Selig has acknowledged that he is aware of Donald Trump Jr.'s relationship to Kalshi and Polymarket, but he has not directly answered whether that is a problem. In fact, he has dismissed it. So it's hard to outright say they're skirting the law. I think they're intentionally using the fact that the laws are vague. And that's much harder to pin down.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">Selig used to work for Crypto.com. Crypto.com is developing Truth Predict with Trump. He filed fifty amicus briefs to let the courts know everything is fine. Isn't that all conflict?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">It's a huge conflict of interest. Trump Jr.'s spokesperson said he doesn't put money directly into the company, he doesn't directly invest. But I have also said that he has a stake, he's going to profit off of it. They're definitely assuming public knowledge won't catch up to them. People are connecting the dots. There is a case to be made that there are a lot of conflicts of interest, a lot of special interest injected into how prediction markets are being shaped. Whether legislation passes in Congress, there are also big lobbying movements by Kalshi, and Polymarket is starting a campaign. But for POGO, as a nonpartisan organization, we don't want to outright say they're being intentional about it because it's not on record. We don't know. Right now the law is vague. So rather than intentionally skirting, I think they're intentionally using the fact that the laws are vague and there are a lot of regulatory loopholes with these event contracts.</div>
+  </div>
+
+  <div class="section-break">Facebook, Myanmar, and the congressional education gap</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">Something that came up in my conversations was the parallel to Facebook and Myanmar. Zuckerberg's whole vision was connection. But it brought together people who committed that atrocity. In that thinking, is Congress just too old to understand how bad this could be? They just don't get it?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">I hadn't heard the Facebook and Myanmar parallel framed that way for prediction markets. But yes, that could definitely be one of the factors. There is an education gap on the Hill. I've spoken to several offices and they have acknowledged that having a Hill briefing, spreading more awareness about what these markets do, would be helpful. It's not on everyone's radar. Not everyone's priority. They have their own bigger fish to fry. But not everyone is aware of how it works, even though there's so much legislation being introduced. I think right now there are around fourteen bills that have been introduced, and around five are bipartisan. They all tackle prediction markets from a different angle. Most of them have in common that they narrow the original Commodity Exchange Act language around categorical bans. The current CEA defers a lot to the CFTC's discretionary authority to determine what's prohibited under Section 5, which is also called the special rule. But a lot of legislation that's been introduced, and something that POGO has been pushing with offices, is to make it explicit that these contracts are prohibited. The CFTC would still review them, but it removes that extra layer and makes things more explicit. That is one of our most simple fixes that we are supporting.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">POGO has not been involved in the sports gambling discussion primarily because we think that's another can of worms that touches on state litigation. Right now we're focused on the federal level and how this impacts insider trading in Congress.</div>
+  </div>
+
+  <div class="section-break">DARPA and the forgotten history</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">Back in 2003, DARPA proposed a prediction market. Senators called it a terrorism futures market and shut it down in under 48 hours. Twenty years later it's running overseas with no oversight. Did everybody forget?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">That's a good question because I don't see it mentioned in the press a lot. Prediction markets are not new and there is a lot of history. Right now those older markets technically still exist, like policy analyst markets, but many have become very discreet or suspended because of the ethical concerns. Some people didn't forget, but most people definitely don't know about it. What DARPA does, in my opinion, is provide a concrete example of the consequences of trading on political and military matters. We shouldn't profit off of politics. And that received a lot of scrutiny in the Senate back then. There are still public records. To answer your question directly: some people remember, maybe some forgot. Most people probably don't know.</div>
+  </div>
+
+  <div class="section-break">Romania, Ireland, and the midterm threat</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">Romania saw a massive wager on a small election and banned Polymarket outright. In Ireland there's now a case that looks like the platform is being used to launder money. And I was told that if somebody really wanted to disrupt the midterms, they would place a $1,000 bet on Polymarket and let the bots take over and amplify the noise to make something seem real that isn't. What do you think?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">Responding to the bot cascade comment: that is definitely possible. It's a question of how impactful and accurate these election-related event contracts actually are. There is evidence that prediction markets tend to perform better than traditional polling. But it depends on where public discourse is and where the skepticism lies. So that could happen. I'm also skeptical of giving too much credit to one big election market dictating where things go. But it's a possibility.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">Also, it's difficult to outright ban these markets. If it was up to me, I think Romania had a good call, that we should ban these markets. That is not POGO's position. That is my personal position. POGO's position is: this exists, make it as safe as possible, and ensure it is in the public's interest. We have protections in place. Kalshi is a US registered market, it comes with know-your-customer policies and surveillance mechanisms. However it's clear that things still fall through the cracks. Kalshi hosted an event contract on Ayatollah Khamenei's death. That was quickly pulled down. That is evidence that something falls through the cracks and there is a structural shortfall.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">For Polymarket, which operates offshore, it's a really tricky problem. Even when the CFTC says they're going to crack down on suspicious trades outside the US, how do you argue for jurisdiction to do that? If you use a VPN and have a crypto wallet, you can potentially bypass a lot of the surveillance measures that traders on Kalshi are required to provide. So those offshore markets exist, and who's to say traders aren't using them. And at the moment, the conversation in Congress is still at the preliminary stage of what event contracts should be banned and how to write clearer legal and regulatory language. I should also note that the CFTC is currently understaffed. They have cut their staff down 25 percent. They're supposed to have five commissioners and there's only one. How can you effectively make rules and take enforcement action when you're understaffed and there's only one commissioner? Whether that's by design or not, hard to say. But it is what it is at the moment.</div>
+  </div>
+
+  <div class="section-break">The Khamenei death bet and Rule 40.11</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">Someone made $553,000 betting on the death of Iran's Supreme Leader. The contract shouldn't have existed under Rule 40.11. Why is that person not in a courtroom?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">I won't give you a satisfying answer. I don't know why. It's unclear whether there is some internal investigation going on. Selig can't really share much when something is under investigation. But I don't know. That poses more questions about whether the structure is equipped to handle these kinds of suspicious trades or not. A lot of the responsibility is placed on the platform itself, which has an incentive not to react quickly. It has to go through that layer, then get to the CFTC to be investigated. That doesn't seem efficient. Kalshi or Polymarket is not going to say let's not make money. Their surveillance structure is a mix of human oversight and automated oversight. Not everything is done by hand. Before 2000, the CFTC used to pre-approve every single contract. Under the Commodity Futures Modernization Act passed around 2000, the discourse reflected very similarly to today: prediction markets have a lot of room for innovation. That was the justification for getting rid of pre-approval, because it was seen as burdensome. That is how this platform self-policing structure was born. As a consequence, you have less oversight. Going back to pre-approval makes logical sense to me, but we are understaffed, so how do we address that.</div>
+  </div>
+
+  <div class="section-break">Campaign staffers and the legal gap</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">Your May fact sheet said campaign staffers admitted to betting on their own candidates using internal polling data. Were any of them charged?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">Not that I know of. They admitted it anonymously in public reporting. It is highly unlikely that they would penalize staff-level government employees. But it is a cause for concern, because once you open that box, it forces the conversation. It pretty much forces Congress to actually do something. I think a lot of people on the Hill are hesitant, especially Republicans. That is not a partisan statement I am making. But if you look at the bills that have been introduced, they are mainly supported and introduced by Democrats. However, there are some bipartisan bills and some Republican members have also introduced legislation. I don't think it is in Congress's best interest to do anything about it.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">I'll also add that with prediction markets, whether there is even a case to charge someone based on misappropriating information, the legal guidance around what counts as insider trading for event contracts is much less clear than for securities. The Van Dyke case will be the first case to test how information gets transferred and what counts as transferring material nonpublic information for personal gain.</div>
+  </div>
+
+  <div class="section-break">Van Dyke, wire fraud, and why not 40.11</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">Why was Van Dyke charged with wire fraud and not with breaking Rule 40.11?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">He had a crypto wallet and transferred the funds. I think wire fraud is the charge that would allow disgorgement of what he earned. That is my quick answer. Also, charging for fraud, the law is much clearer. The crime is new. There's no precedent for 40.11 applied against an individual. So they lean on what's already established, what has had precedent before. Applying laws we already know to prediction markets is something being tested right now: how much does the law governing other financial instruments also apply to event contracts. But also, charging under the special rule right now would be difficult because the language is overly broad. They could make a case it's not in the public's interest, but there is no ban on event contracts related to the military. Period. So to charge under 40.11 they would need explicit language that doesn't fully exist right now.</div>
+  </div>
+
+  <div class="section-break">Whether a whole new framework is needed</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">Does this mean we need a whole new framework, a whole new set of laws?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">My first answer would be no. We don't have to create a whole new framework, legal or regulatory. There is already a weak structure we could build on top of. POGO has supported efforts that expand the kinds of event contracts that should be prohibited. We have supported banning government action contracts outright, because we don't think money should touch politics. That is a very hot take in America. On using prediction markets as campaign contributions, that's not my area of expertise. But from a democracy standpoint, it's very troubling. Because now you have voters with a financial incentive in mind rather than a moral or ethical one. Instead of voting for the candidate that's right for you, you're voting for the one that might be the more profitable option. That only makes government more inefficient.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">On the event contracts with death: why was that created in the first place? And why, when we have the CFTC as our oversight structure, did they not act? The response time is really slow, and a lot of responsibility is placed on the platform itself, which has an incentive not to react quickly. I also think the economic purpose test, which was eliminated around 2000 under that same legislation, should be brought back and refined. It was a test that determined whether an event contract has a significant economic function. If that kind of process was more refined and improved, we probably would have answers to some of the questions we are asking now.</div>
+  </div>
+
+  <div class="section-break">The information exchange and journalistic integrity</div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">How I see a prediction market: you're in a big conference room, the size of the market, with a large group of people exchanging information but throwing money into it. Information exchange is a natural part of life. When you start putting money into it, the social stakes are higher. That changes how we view the world and how we value things. Also: prediction markets have been relatively quiet until 2024 and we've done fine. We have journalists, we have credible resources that exist and wouldn't induce these social and political consequences. I don't know if you've heard about traders threatening journalists. That is real. Journalistic integrity is on the line. Sure, this could be a great way to get information, but at what cost? We have structures in place. It just depends on what society values.</div>
+  </div>
+
+  <div class="section-break">Insider trading as a feature of these markets</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">It seems like all these markets function with someone having insider information. Someone knows something. One guy places a $1,000 bet. Someone bigger picks up on it, puts in $10,000. The bots find it and amplify. So there is always going to be one percent of people winning and the majority losing. Is that true? Is that how you see it?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">It's more nuanced than a yes or no, because that is how other financial markets also work with securities and stocks. The difference is that cracking down on insider trading and fraud is much more regular in securities markets than in event contract markets. I don't think that's what makes event contracts unique. That is a natural component of these kinds of financial markets. Technically you could say that, but I don't think that's the real issue. The real issue is the lack of regulations and laws governing them. Now if that is the case, it's an argument for whether we should just ban all of these markets, because it's so hard to pinpoint who knew what and how they came to their position. If you see a large bet on an option with low odds, that seems suspicious. But it's not necessarily breaking the law. It's a happy coincidence. It's really hard to catch how information gets transferred, especially when trading is done through an intermediary. So yes, it's more nuanced than a simple yes.</div>
+  </div>
+
+  <div class="section-break">What POGO is working on</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">What's coming up? What's POGO working on?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">We are going to continue putting our foot on the gas. Even though hearings are hit or miss on whether they'll use our questions, by posting those questions we're building a congressional record that shows what we think is important and what should be answered. If Congress is not answering those questions, we're saying: you're not addressing what the public wants to know. That keeps them accountable. We are also going to continue supporting legislation that codifies Section 5 of the CEA and expands prohibitions to military, elections, and government actions. We're interested in a broader ban and we are going to keep pushing. We're also supporting legislation that improves the oversight mechanism for federal government. We are a huge supporter of having the Government Accountability Office take a role. We also want legislation that requires government officials and staff in all three branches to not trade on these markets for their entire tenure. And annual certifications: covered individuals certify publicly that they did not trade. Create a record, make it public. I also work with ACDC and their work has been fantastic. They are so data heavy. On the advocacy side it makes it much easier to support our points. I'm thinking about producing more work that gives Congress a resource saying: this is bad, you should do something about it.</div>
+  </div>
+
+  <div class="section-break">On being filmed</div>
+
+  <div class="exchange">
+    <div class="speaker pedro">Pedro</div>
+    <div class="line">I do have a production company that's interested in what I'm doing. There's a chance I could get a proper film crew and do formal interviews. Would you be interested in sitting down on camera?</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">Sure. Yeah. Sure.</div>
+  </div>
+
+  <div class="exchange">
+    <div class="speaker guest">Luong</div>
+    <div class="line">I really hope somebody pays attention, because it's hard to get people to engage with something that's happening right now. People are used to documentaries about something that happened ten or fifteen years ago. It's different when you're doing it in real time. Somebody needs to pay attention now because the midterms are coming. There's a lot of stuff coming out from ACDC for the midterms and it's moving quick. I'm so glad you're hopping on it this fast.</div>
+  </div>
+
+</div>
+
+
+<!-- CLOCK -->
+<div class="clock">
+  <div class="clock-eye">Ticking Clock</div>
+  <div class="clock-date">December 7, 2026</div>
+  <div class="clock-label">USA v. Van Dyke &nbsp;·&nbsp; Wire Fraud &nbsp;·&nbsp; SDNY &nbsp;·&nbsp; First criminal prediction market insider trading trial in US history</div>
+</div>
+
+<div class="foot">All In: Betting on America &nbsp;·&nbsp; Pedro Feria Pino, SOC / VEFILM &nbsp;·&nbsp; July 2026 &nbsp;·&nbsp; Pre-Production</div>
+
+</body>
+</html>
