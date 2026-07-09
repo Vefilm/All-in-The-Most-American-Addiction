@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALL IN — Field Update, July 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #B11226;
+    --amber: #E8A04A;
+    --bg: #060508;
+    --surface: #0a0a12;
+    --body: #e8e0d0;
+    --muted: rgba(255,255,255,0.55);
+    --dim: rgba(255,255,255,0.28);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--body);
+    font-family: Georgia, serif;
+    line-height: 1.9;
+    padding: 60px 40px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .logo { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+  .logo span { color: var(--red); }
+  .logo-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.38em; text-transform: uppercase; color: rgba(232,160,74,0.7); margin-bottom: 56px; }
+
+  .doc-eye { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--amber); margin-bottom: 12px; }
+  .doc-title { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 3rem; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.05; margin-bottom: 12px; }
+  .doc-sub { font-size: 0.9rem; color: var(--muted); font-style: italic; margin-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 40px; }
+
+  .intro { font-size: 1rem; line-height: 1.94; color: var(--body); margin-bottom: 60px; }
+
+  .interview-block { margin-bottom: 64px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.07); }
+
+  .int-num { font-family: 'JetBrains Mono', monospace; font-size: 0.54rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--amber); margin-bottom: 6px; }
+  .int-name { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; line-height: 1.1; }
+  .int-role { font-size: 0.8rem; color: var(--muted); font-style: italic; margin-bottom: 6px; }
+  .int-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 3px;
+  }
+  .badge-red { background: rgba(177,18,38,0.15); border: 1px solid rgba(177,18,38,0.35); color: var(--red); }
+  .badge-amber { background: rgba(232,160,74,0.1); border: 1px solid rgba(232,160,74,0.3); color: var(--amber); }
+  .badge-dim { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: var(--dim); }
+
+  .int-body { font-size: 0.92rem; line-height: 1.92; margin-bottom: 28px; }
+  .int-body p { margin-bottom: 16px; }
+
+  .pull {
+    background: var(--surface);
+    border-left: 3px solid var(--red);
+    padding: 16px 22px;
+    margin: 0 0 24px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .pull-text { font-size: 0.9rem; font-style: italic; line-height: 1.76; color: var(--body); }
+
+  .int-link {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.54rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(232,160,74,0.35);
+    padding-bottom: 2px;
+    transition: border-color 0.15s;
+  }
+  .int-link:hover { border-color: var(--amber); }
+
+  .status-confirmed { color: var(--red); }
+  .status-deferred { color: var(--amber); }
+
+  .divider { border: none; border-top: 2px solid rgba(177,18,38,0.2); margin: 80px 0 60px; }
+
+  .closing { padding: 40px 0 0; border-top: 1px solid rgba(255,255,255,0.07); }
+  .closing-eye { font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 14px; }
+  .closing-body { font-size: 0.9rem; color: var(--muted); line-height: 1.9; margin-bottom: 32px; }
+
+  .clock { text-align: center; border-top: 1px solid rgba(177,18,38,0.3); padding-top: 36px; margin-top: 60px; }
+  .clock-eye { font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--dim); margin-bottom: 10px; }
+  .clock-date { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2.2rem; color: var(--red); letter-spacing: 0.08em; }
+  .clock-label { font-family: 'JetBrains Mono', monospace; font-size: 0.54rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); margin-top: 8px; }
+
+  .foot { margin-top: 40px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.1); }
+</style>
+</head>
+<body>
+
+<div class="logo">ALL <span>IN</span></div>
+<div class="logo-sub">Betting on America</div>
+
+<div class="doc-eye">Field Update &nbsp;·&nbsp; Week of July 7, 2026 &nbsp;·&nbsp; Pedro Feria Pino</div>
+<div class="doc-title">Five Conversations</div>
+<div class="doc-sub">For Adam and Eve &nbsp;·&nbsp; Bungalow &nbsp;·&nbsp; July 2026</div>
+
+<div class="intro">
+  I spent this week making calls. Five conversations with five people who are closer to this story than almost anyone getting airtime on it. A research fellow in Paris who helped break it open. A former CFTC attorney in New York whose whistleblower cases got dropped the week Trump took office. A GWU professor who figured out you could download the entire Polymarket blockchain and run the numbers. The data scientist who was awake at 4am with her one-year-old when the Iran strike came in and finally understood what she had been looking at. And a policy analyst in Washington who told me something on record, directly to me, that she has not said anywhere else in public.
+<br><br>
+  Here is what they told me.
+</div>
+
+
+<!-- HORNSBY -->
+<div class="interview-block">
+  <div class="int-num">Interview 01</div>
+  <div class="int-name">Michael Hornsby</div>
+  <div class="int-role">ACDC Research Fellow, Paris &nbsp;·&nbsp; Co-author, "Insider Risks in Polymarket Political Markets"</div>
+  <div class="int-meta">
+    <span class="badge badge-dim">Pre-July 8, 2026</span>
+    <span class="badge badge-amber">&#9675; &nbsp; Camera: Deferred</span>
+  </div>
+
+  <div class="int-body">
+    <p>Michael co-wrote the ACDC report that put this story on the map. He's based in Paris and for now he's staying off camera, directing me to his two colleagues in Washington instead. Both of them I have now spoken to. He was the first person in the field to take my call.</p>
+
+    <p>His read on the market: insider information is a feature, not a flaw. The platforms are structurally designed to reward people who already know how something ends. He put a number on it. Seventy percent of profits flow to one percent of accounts. Whether those are actual insiders or sophisticated actors who have learned to shadow insiders on the blockchain is almost beside the point. The average user does not have a fair shot. He called it rigged, then told me he would never say that on camera or in print.</p>
+
+    <p>He also connected the current situation directly to DARPA's 2003 terrorism futures market, which a senator killed in 48 hours after asking a simple question: what happens if a terrorist wants to profit from his own attack? Two decades later the same concept is running offshore, outside US jurisdiction, covering military strikes on a daily basis. Nobody formally killed it this time.</p>
+
+    <p>On Michael Selig and the CFTC's advisory council made up of the same industry it is supposed to regulate, Hornsby was unambiguous. He called it the police policing themselves. He also flagged a nonprofit called the Decleptocracy Project, which started by studying Russia and Ukraine and has now turned its lens on the US. Worth exploring.</p>
+  </div>
+
+  <div class="pull">
+    <div class="pull-text">"It's rigged. I wouldn't say that on camera or in print. But people need to know these things are in various ways rigged. It's not a fair economic system. What gets very worrying is the military angle."</div>
+  </div>
+
+  <a class="int-link" href="https://allin.pedroferiapino.com/betting-on-america/interviews.html#michael" target="_blank">Read full transcript &rarr;</a>
+</div>
+
+
+<!-- KOVEL -->
+<div class="interview-block">
+  <div class="int-num">Interview 02</div>
+  <div class="int-name">David Kovel</div>
+  <div class="int-role">Partner, Kirby McInerney LLP, New York &nbsp;·&nbsp; Former CFTC Staff Attorney &nbsp;·&nbsp; Represents commodities whistleblowers</div>
+  <div class="int-meta">
+    <span class="badge badge-dim">Pre-July 8, 2026</span>
+    <span class="badge badge-red">&#9632; &nbsp; Confirmed on Camera</span>
+  </div>
+
+  <div class="int-body">
+    <p>David Kovel spent years inside the CFTC as a staff attorney. He now represents commodity market whistleblowers in private practice. When the Trump administration came in, the cases he had in front of CFTC enforcement were dropped. Not slowed. Dropped. He told me the entire Chicago enforcement office resigned. The most senior, most seasoned people working to prevent cryptocurrency fraud and prediction market abuse. Gone.</p>
+
+    <p>He walked me through the statute. The Commodity Exchange Act is clear: the CFTC is supposed to prohibit contracts involving war, assassination, gaming, and other specific categories. They just have not. Under Biden they were moving toward enforcement and lost on a technical procedural point, needing a formal rulemaking rather than relying on the statute alone. The Trump administration dropped the rulemaking. The floodgates opened.</p>
+
+    <p>On the question of regulatory capture versus what I'm calling regulatory deployment, Kovel still calls it capture. The mechanism is forbearance. Active choice not to enforce laws that remain on the books. He noted that Selig has filed 50 amicus briefs against state attorneys general on behalf of the industry he is supposed to regulate. When I pointed out that this sounds more like attack dog than captive watchdog, he said the end result is the same: the law is not being enforced, and the industry benefits.</p>
+
+    <p>He is in New York and confirmed for camera. He also said something I keep coming back to. Some politicians are now setting up prediction markets on their own legislative actions. George Santos did it. Nobody, he said, was even surprised.</p>
+  </div>
+
+  <div class="pull">
+    <div class="pull-text">"Suddenly everything that they were enforcing, now they're welcoming. It's a schizophrenia. It's a remarkable shift at the CFTC."</div>
+  </div>
+
+  <a class="int-link" href="https://allin.pedroferiapino.com/betting-on-america/interviews.html#david-bg" target="_blank">Read full transcript &rarr;</a>
+</div>
+
+
+<!-- SZAKONYI -->
+<div class="interview-block">
+  <div class="int-num">Interview 03</div>
+  <div class="int-name">David Szakonyi</div>
+  <div class="int-role">Associate Professor, George Washington University &nbsp;·&nbsp; ACDC Research Fellow &nbsp;·&nbsp; Co-author, "Insider Risks in Polymarket Political Markets"</div>
+  <div class="int-meta">
+    <span class="badge badge-dim">Pre-July 8, 2026</span>
+    <span class="badge badge-red">&#9632; &nbsp; Confirmed on Camera</span>
+  </div>
+
+  <div class="int-body">
+    <p>David Szakonyi is the GWU professor who co-wrote the ACDC report with Hornsby and Michelle. He had the methodological eureka moment: Polymarket's offshore platform posts every trade on a public blockchain. You can download the entire thing and run the numbers yourself. Which is what they did.</p>
+
+    <p>His finding: these platforms are potentially fundamentally unfair. Not tilted. Fundamentally structured against the average user. He compares the dynamic to Ponzi schemes in one specific way. A small group captures all the benefit while the mass of participants is misled about their actual odds. In military and political markets, that small group has early or exclusive access to information that everyone else will learn about after the market has already closed.</p>
+
+    <p>He has studied how power captures institutions in Russia, Congo, Germany, and now the United States. He sees the pattern here. Companies with direct ties to the administration, through campaign donations or family connections, are receiving preferential treatment and avoiding the kind of scrutiny that other democratic countries are beginning to apply. He called it a hypocrisy: a country that defines itself against government intervention in markets is quietly allowing a small group of connected families to profit because of their access inside government.</p>
+
+    <p>His proposed solution is not more enforcement. Enforcement of insider trading in prediction markets is all but impossible, he says. His answer is to get rid of the specific categories of markets where insider access is inherent. He is DC-based and confirmed for camera.</p>
+  </div>
+
+  <div class="pull">
+    <div class="pull-text">"There are hundreds, but not thousands of people that we think are trading on privileged information, and the way they behave on the blockchain makes it very feasible for investigators to follow up and bring them to justice."</div>
+  </div>
+
+  <a class="int-link" href="https://allin.pedroferiapino.com/betting-on-america/interviews.html#szakonyi" target="_blank">Read full transcript &rarr;</a>
+</div>
+
+
+<!-- MICHELLE -->
+<div class="interview-block">
+  <div class="int-num">Interview 04</div>
+  <div class="int-name">Michelle Kendler-Kretsch</div>
+  <div class="int-role">ACDC Research Fellow &nbsp;·&nbsp; Former Deputy Director of Investigations, The Sentry &nbsp;·&nbsp; Lead data scientist, ACDC report &nbsp;·&nbsp; 60 Minutes (2026)</div>
+  <div class="int-meta">
+    <span class="badge badge-dim">July 8, 2026</span>
+    <span class="badge badge-red">&#9632; &nbsp; Confirmed on Camera</span>
+  </div>
+
+  <div class="int-body">
+    <p>Michelle Kendler-Kretsch is the data scientist who built the three-flag system in the ACDC report. Before this work she was deputy director of investigations at The Sentry, the financial forensics organization. She appeared on 60 Minutes earlier this year and has a master's in international security policy. She was not expecting to end up here.</p>
+
+    <p>She described her eureka moment to me. She had been running models in a notebook, watching odds shift on the Iran market, and questioning whether she actually understood how Polymarket worked. Then at 4am her one-year-old daughter woke up and the news came in. The US had struck Iran. She told me: I just got goosebumps when she said it. What she said next I have not stopped thinking about. "The element of surprise is everything. And you've ruined that on Polymarket?"</p>
+
+    <p>What drove the ACDC analysis toward simplicity was an observation about the environment of impunity. In an environment where you can get away with the obvious, you do not spend money doing it the complicated way. So the methodology was a search for people doing it obviously. Large bets on longshots, right before the outcome, with no prior trading history. The 52% win rate on longshots was the number that traveled. She told me the number she thinks is actually more damning is 18%: the share of military wallets hitting a 90 to 100% success rate on longshots. Against an 11% baseline.</p>
+
+    <p>She has now turned her attention to elections and she is scared. A foreign actor with $1,000 and a prediction market account can place a bet on a candidate, trigger the bot network that follows institutional money on the platform, amplify the signal to look like institutional confidence, and count none of it toward campaign finance limits. Cheap. No attribution. She said it herself: "I'm starting to fail to name markets that should be allowed on Polymarket anymore."</p>
+  </div>
+
+  <div class="pull">
+    <div class="pull-text">"When we started our work on insider trading, we said we don't care about elections. And now it's all we can think about, because we're just learning more and more about the platform, how it can be exploited, how it can be abused. It's terrifying."</div>
+  </div>
+
+  <a class="int-link" href="https://allin.pedroferiapino.com/betting-on-america/interviews.html#michelle" target="_blank">Read full transcript &rarr;</a>
+</div>
+
+
+<!-- LUONG -->
+<div class="interview-block">
+  <div class="int-num">Interview 05 &nbsp;·&nbsp; July 9, 2026</div>
+  <div class="int-name">Janice Luong</div>
+  <div class="int-role">Policy Analyst, Project on Government Oversight &nbsp;·&nbsp; Washington DC</div>
+  <div class="int-meta">
+    <span class="badge badge-dim">July 9, 2026 &nbsp;·&nbsp; Phone</span>
+    <span class="badge badge-red">&#9632; &nbsp; Confirmed on Camera</span>
+  </div>
+
+  <div class="int-body">
+    <p>Janice Luong is a policy analyst at POGO, the Project on Government Oversight. Michael Hornsby gave me her name in our first call. She works directly with congressional offices on legislation targeting prediction markets. I spoke to her Wednesday morning.</p>
+
+    <p>She confirmed what I have been hearing from everyone: the CFTC is using vagueness as a tool, not fighting it. The laws governing event contracts are broadly written. The classification of these contracts as swaps is still being litigated. The CFTC has room to maneuver and is choosing to maneuver toward the industry. She did not say this is intentional in the criminal sense. She said they are intentionally using the fact that the laws are vague. That phrasing matters. It is harder to prove and harder to prosecute and that is the point.</p>
+
+    <p>The CFTC is supposed to have five commissioners. There is one. Staff has been cut by 25 percent. Whether that is by design, she said, hard to say. But it is what it is.</p>
+
+    <p>Then she said something she has not said publicly. I asked about Romania, which banned Polymarket outright after $371 million was wagered on a single election. She told me Romania got it right. The markets should be banned. Then she immediately separated that from POGO's official position. POGO is a nonpartisan organization. Their position is: this exists, make it as safe as possible, ensure it serves the public interest. Her personal position is different. I am the first person she said this to on the record.</p>
+
+    <p>On Van Dyke: he was charged with wire fraud, not with violating Rule 40.11, because there is no explicit statutory ban on event contracts related to military actions. There is a broad rule. There is no explicit prohibition. The Van Dyke trial on December 7 will test how much of the existing law can be stretched to cover something the law was never written to address.</p>
+  </div>
+
+  <div class="pull">
+    <div class="pull-text">"Romania had a good call, that we should ban these markets. That is not POGO's position. That is my personal position."</div>
+  </div>
+
+  <a class="int-link" href="https://allin.pedroferiapino.com/betting-on-america/interviews.html#luong" target="_blank">Read full transcript &rarr;</a>
+</div>
+
+
+<hr class="divider">
+
+
+<div class="closing">
+  <div class="closing-eye">Where this is going</div>
+  <div class="closing-body">
+    Five subjects. Four confirmed on camera. One more conversation to close. The trial is December 7. That is the clock. Everything before it is setup. Everything after it is consequence. I am following the money and it keeps leading to the same place: a regulatory body with one commissioner, laws written vaguely enough to be useless, and a platform registered in Panama that everyone in Washington knows about and nobody has stopped.
+    <br><br>
+    Full interview transcripts are available at the link below each summary. More conversations are in development.
+  </div>
+  <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber);">
+    Pedro Feria Pino, SOC &nbsp;·&nbsp; VEFILM &nbsp;·&nbsp; vefilm@gmail.com
+  </div>
+</div>
+
+
+<div class="clock">
+  <div class="clock-eye">Ticking Clock</div>
+  <div class="clock-date">December 7, 2026</div>
+  <div class="clock-label">USA v. Van Dyke &nbsp;·&nbsp; Wire Fraud &nbsp;·&nbsp; SDNY &nbsp;·&nbsp; First criminal prediction market insider trading trial in US history</div>
+</div>
+
+<div class="foot">ALL IN: Betting on America &nbsp;·&nbsp; VEFILM &nbsp;·&nbsp; Pedro Feria Pino, SOC &nbsp;·&nbsp; July 2026</div>
+
+</body>
+</html>
