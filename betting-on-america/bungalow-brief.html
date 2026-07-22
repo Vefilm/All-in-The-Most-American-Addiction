@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALL IN: Brief for Bungalow</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #B11226;
+    --amber: #E8A04A;
+    --bg: #060508;
+    --surface: #0e0e18;
+    --body: #e8e0d0;
+    --muted: rgba(232,224,208,0.6);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--body);
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.9;
+    padding: 60px 40px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .logo {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .logo span { color: var(--red); }
+  .tagline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: rgba(232,160,74,0.65);
+    margin-bottom: 44px;
+  }
+  .doc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.56rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 10px;
+  }
+  .doc-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 2.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.05;
+    margin-bottom: 10px;
+  }
+  .doc-sub {
+    font-size: 0.86rem;
+    color: var(--muted);
+    font-style: italic;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 52px;
+  }
+
+  /* Sections */
+  h2 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+    margin-top: 52px;
+    color: var(--body);
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  p {
+    margin-bottom: 16px;
+    font-size: 0.93rem;
+    line-height: 1.92;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  /* Pull quotes */
+  blockquote {
+    background: var(--surface);
+    border-left: 3px solid var(--red);
+    padding: 14px 20px;
+    margin: 24px 0;
+    border-radius: 0 3px 3px 0;
+  }
+  blockquote p {
+    font-style: italic;
+    font-size: 0.9rem;
+    margin: 0 0 6px 0;
+  }
+  blockquote cite {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.48rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-style: normal;
+  }
+
+  /* Divider */
+  hr {
+    border: none;
+    border-top: 1px solid rgba(177,18,38,0.2);
+    margin: 56px 0;
+  }
+
+  /* Character and villain cards */
+  .card {
+    background: var(--surface);
+    border-radius: 4px;
+    padding: 24px 26px;
+    margin-bottom: 22px;
+  }
+  .card-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 3px;
+  }
+  .card-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.48rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 14px;
+  }
+  .card p { font-size: 0.88rem; margin-bottom: 10px; }
+  .card p:last-child { margin-bottom: 0; }
+
+  .villain-card {
+    background: rgba(177,18,38,0.05);
+    border: 1px solid rgba(177,18,38,0.15);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 18px;
+  }
+  .villain-card .card-name { color: #e87a8a; }
+  .villain-card .card-role { color: rgba(177,18,38,0.55); }
+  .villain-card p { font-size: 0.88rem; margin-bottom: 10px; }
+  .villain-card p:last-child { margin-bottom: 0; }
+
+  /* Verification note */
+  .verify {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(232,160,74,0.6);
+    background: rgba(232,160,74,0.06);
+    border: 1px solid rgba(232,160,74,0.18);
+    border-radius: 3px;
+    padding: 10px 14px;
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+
+  /* Numbered list */
+  ol.steps { list-style: none; counter-reset: steps; margin: 16px 0; }
+  ol.steps li {
+    counter-increment: steps;
+    display: flex;
+    gap: 14px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+  ol.steps li::before {
+    content: counter(steps);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--red);
+    background: rgba(177,18,38,0.1);
+    border: 1px solid rgba(177,18,38,0.3);
+    border-radius: 50%;
+    min-width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* Clock footer */
+  .clock {
+    text-align: center;
+    border-top: 1px solid rgba(177,18,38,0.25);
+    padding-top: 40px;
+    margin-top: 60px;
+  }
+  .clock-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 10px;
+  }
+  .clock-date {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 2.4rem;
+    color: var(--red);
+    letter-spacing: 0.06em;
+  }
+  .clock-desc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-top: 8px;
+    line-height: 1.7;
+  }
+
+  .foot {
+    text-align: center;
+    margin-top: 36px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.48rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.08);
+  }
+</style>
+</head>
+<body>
+
+<div class="logo">ALL <span>IN</span></div>
+<div class="tagline">Betting on America</div>
+
+<div class="doc-label">Working Brief &nbsp;·&nbsp; July 2026 &nbsp;·&nbsp; For Bungalow</div>
+<div class="doc-title">Background</div>
+<div class="doc-sub">Pedro Feria Pino, SOC &nbsp;·&nbsp; VEFILM &nbsp;·&nbsp; Work in progress. Send questions back.</div>
+
+
+<h2>What Is Polymarket</h2>
+<p>Polymarket is a prediction market. Anyone with a crypto wallet can bet real money on real-world outcomes: elections, military strikes, government decisions, the death of a head of state. It is not a stock exchange and not technically a casino, which is how it has avoided most regulation. It was founded in 2020 by Shane Coplan, who was 22 years old at the time, and is registered in Panama.</p>
+<p>The concept is old. Prediction markets have existed in academic and limited commercial forms since the 1990s. The theory: people betting real money on an outcome produce more accurate forecasts than any poll or model. The problem: the same mechanism that makes them accurate makes them a tool for anyone who already knows the answer.</p>
+
+
+<h2>History of the Ban</h2>
+<p>In 2022, the CFTC fined Polymarket $1.4 million for operating an unregistered derivatives exchange and required it to stop serving US users. Polymarket did not shut down. It moved offshore to Panama and kept building. A US user with a VPN and a crypto wallet can access it in under five minutes. The ban accomplished one thing: it put the platform outside US regulatory reach while doing almost nothing to stop American participation.</p>
+<p>Kalshi is the US-registered version, a CFTC-supervised prediction market that launched after the offshore model proved the demand. Kalshi operates under US rules. Polymarket does not. The serious money and the risks all live offshore.</p>
+
+
+<h2>The Worst Case Scenario</h2>
+<p>What is already happening: US military personnel with advance knowledge of operations are placing bets before those operations execute, then collecting when they succeed. A US Army intelligence officer was federally indicted for doing this on the Venezuela operation. Campaign staffers admitted anonymously to betting on their own candidates using internal polling data. Nobody has been charged for that.</p>
+<p>What could happen next: Polymarket odds are broadcast in real time on CNN and Reuters. When a cluster of wallets bets heavily that a US strike will occur in the next 48 hours, every adversary monitoring the platform sees that signal. The element of surprise is gone before the planes leave the runway.</p>
+<p>The question nobody wants to say out loud: if you have the ability to influence an event, and a financial stake in a specific outcome, you have both means and motive to make it happen. DARPA identified this in 2003 and killed its own program because of it. The same concept is now running commercially, offshore, with hundreds of millions of dollars in bets on US government actions every month.</p>
+
+
+<h2>The DARPA Moment</h2>
+<p>In 2003, DARPA proposed a prediction market called the Policy Analysis Market to gather intelligence on Middle East political instability. Senators Ron Wyden and Byron Dorgan took the Senate floor and called it a "terrorism futures market," asking one question: what happens if a terrorist bets on the attack he is planning? DARPA canceled the program within 48 hours.</p>
+<p>The concept did not die. It moved offshore, evolved through two decades of academic research and crypto infrastructure, and became Polymarket. Nobody has asked the same question from the Senate floor this time.</p>
+
+
+<h2>The Iran Example</h2>
+<p>Before a US military strike on Iran, Polymarket odds shifted sharply. A cluster of wallets with no prior trading history placed large bets on the strike when the market considered it unlikely. When the strike happened, those wallets collected. Data scientist Michelle Kendler-Kretsch had been tracking the market in real time, running probability models in her notebook, watching the odds move. She was awake at 4am with her one-year-old daughter when the news confirmed what she had been watching on her screen.</p>
+
+<blockquote>
+  <p>"The element of surprise is everything. And you've ruined that on Polymarket?"</p>
+  <cite>Michelle Kendler-Kretsch &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; 60 Minutes</cite>
+</blockquote>
+
+
+<h2>Elections</h2>
+<p>Prediction markets now cover 96% of US primary races. The same platform that broadcast the Iran strike in advance runs markets on every congressional seat heading into the midterms. A single $1,000 bet on a candidate triggers a cascade of automated bots that follow large money moves, making a candidate appear more likely to win without any actual shift in voter support. None of that counts toward campaign finance limits. Nothing stops a foreign government from doing it.</p>
+<p>Think of a Polymarket bet as a campaign contribution with a bot multiplier. You invest a small amount that looks like a large amount, and none of it falls under any donation cap. If the money comes from overseas, there is currently no mechanism to stop it or trace it.</p>
+
+
+<h2>Romania</h2>
+<p>In 2024, $371 million was wagered on Romania's presidential election on Polymarket. The figure dwarfed the country's entire political advertising market. Romania banned Polymarket outright. One expert told me on the record, for the first time publicly, that Romania got it right and the markets should be banned. That is her personal position, separate from her organization's official stance. She made that distinction explicitly when she spoke to me.</p>
+
+
+<h2>Money Laundering</h2>
+<p>In Ireland's 2024 Dublin Central election, more than $1 million was wagered on Polymarket. Researchers found that 86% of the trading volume was wash trading: money moving between wallets controlled by the same actor to simulate market activity. The Irish Times investigated and surfaced the name Gerry Hutch, a figure with documented connections to organized crime. The investigation is ongoing. No charges have been filed. Nobody knows yet if this was Polymarket being used as a laundering vehicle or one bad actor finding a gap. Either answer is a problem.</p>
+
+
+<h2>What the Experts Are Saying</h2>
+<p>The Facebook parallel keeps coming up. Zuckerberg built a connection platform. The outcome in Myanmar was genocide, because he connected people who wanted to find each other for that purpose. The technology outran the capacity to regulate it. Prediction markets are the same dynamic applied to war, elections, and government decisions, with one difference: prediction markets are not an accidental side effect. They are specifically designed to put money on these outcomes.</p>
+
+<blockquote>
+  <p>"These markets touch democracy, they touch national security."</p>
+  <cite>Michael Hornsby &nbsp;·&nbsp; ACDC Research Fellow</cite>
+</blockquote>
+
+<blockquote>
+  <p>"There's this hypocrisy: a small group of companies and families are making a ton of money because of either corruption or just being able to buy influence within the government."</p>
+  <cite>David Szakonyi &nbsp;·&nbsp; Associate Professor, George Washington University</cite>
+</blockquote>
+
+<blockquote>
+  <p>"I'm starting to fail to name markets that should be allowed on Polymarket anymore."</p>
+  <cite>Michelle Kendler-Kretsch &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; 60 Minutes</cite>
+</blockquote>
+
+
+<h2>How It Works: Click by Click</h2>
+<ol class="steps">
+  <li>Someone with insider knowledge places a bet through an anonymous crypto wallet on an offshore platform the US government cannot touch.</li>
+  <li>The blockchain is public. Bots and sophisticated traders monitor it in real time, see the unusual movement, and pile on.</li>
+  <li>The market shifts, broadcasting the insider signal to everyone watching, including foreign adversaries.</li>
+  <li>When the event resolves, the insider collects. The bots collect. The platform takes its fee. The government learns about it months later, through a journalist or an indictment.</li>
+  <li>Nobody goes to jail. The CFTC has one commissioner instead of five. Enforcement dropped from 58 cases in 2024 to 13 in 2025. The wallets are anonymous. The platform is offshore. There is no explicit statute making any of this illegal. December 7 will be the first time a US court has to answer that question.</li>
+</ol>
+
+
+<hr>
+
+
+<h2>The Characters</h2>
+
+<div class="card">
+  <div class="card-name">Michelle Kendler-Kretsch</div>
+  <div class="card-role">Data Scientist &nbsp;·&nbsp; ACDC &nbsp;·&nbsp; Former The Sentry &nbsp;·&nbsp; 60 Minutes &nbsp;·&nbsp; Confirmed on Camera</div>
+  <p>She spent her career tracking the financial flows behind African war crimes at The Sentry, the investigative organization George Clooney co-founded. She came to prediction markets by accident, recruited by ACDC to run data on a hunch nobody had tested yet. She had never been on a betting app.</p>
+  <p>She is up late with her one-year-old daughter, watching Polymarket odds move on an upcoming US military strike, second-guessing her own models because the numbers are too clean. The news breaks at 4am. The US struck Iran. She was right. Her first thought: "Oh, shit. I understand Polymarket." Her second: the element of surprise is everything, and Polymarket just ruined it.</p>
+  <p>She is now six months into work she did not plan to do, on a problem she now describes as terrifying. The midterms are coming. She is watching the same patterns she saw before Iran show up in election markets. She is trying to document it fast enough to matter. We follow her through a midterm cycle she believes is about to be the first real test of how badly prediction markets can distort a US election.</p>
+</div>
+
+<div class="card">
+  <div class="card-name">Janice Luong</div>
+  <div class="card-role">Policy Analyst &nbsp;·&nbsp; Project on Government Oversight (POGO), Washington DC &nbsp;·&nbsp; Confirmed on Camera</div>
+  <p>She works directly with congressional offices on the 14 active bills targeting prediction markets. She did not stumble into this. It is her job.</p>
+  <p>What she found: an agency with one commissioner instead of five, a 25% staff cut, a rulebook written vaguely enough to be strategically useless, and a platform getting more sophisticated every month outside US jurisdiction. Most of the 14 bills, in her view, do not get to the root of the problem.</p>
+  <p>The thing she had never said publicly before she spoke to me: Romania got it right. These markets should be banned. POGO cannot say that officially. She separated her personal position from her organization's for the first time on the record. We follow her into the congressional offices where the decisions will be made, through a markup process that determines whether any of those bills becomes law before December 7.</p>
+</div>
+
+<div class="card">
+  <div class="card-name">David Szakonyi</div>
+  <div class="card-role">Associate Professor, GWU &nbsp;·&nbsp; ACDC Research Fellow &nbsp;·&nbsp; Confirmed on Camera</div>
+  <p>He spent his career studying how power captures institutions in Russia, Congo, and Eastern Europe. Then he started seeing the same patterns in the United States.</p>
+  <p>Polymarket posts every trade on a public blockchain. You can download the entire thing and run the numbers. He did. The result was the 52% win rate figure that became the backbone of the ACDC report and the 60 Minutes segment. His conclusion: policing insider trading in these markets is structurally impossible. His answer is not more enforcement. It is eliminating the categories where insider access is built in by design: military markets, political markets, government action markets.</p>
+  <p>We follow him into the next data release, which will trace where the winning money goes and make the case that the people who should be investigating this are not doing their jobs.</p>
+</div>
+
+<div class="card">
+  <div class="card-name">David Kovel</div>
+  <div class="card-role">Partner, Kirby McInerney LLP, New York &nbsp;·&nbsp; Former CFTC Staff Attorney &nbsp;·&nbsp; Confirmed on Camera</div>
+  <p>Former CFTC staff attorney who now represents commodity market whistleblowers in private practice. He knows exactly how the agency is supposed to work and what it is not doing.</p>
+  <p>When the Trump administration came in, his whistleblower cases were dropped. Not delayed. Dropped. The entire Chicago CFTC enforcement office resigned. The most senior people working to prevent cryptocurrency fraud and prediction market abuse. Gone.</p>
+  <p>"I didn't want to believe what I was believing," he told me. "But I guess it's like that." He keeps tracking Senator Warren's office for updates. He is confirmed for camera in New York.</p>
+</div>
+
+
+<hr>
+
+
+<h2>The Villains</h2>
+
+<div class="villain-card">
+  <div class="card-name">Shane Coplan</div>
+  <div class="card-role">Founder and CEO, Polymarket &nbsp;·&nbsp; Does Not Do Press</div>
+  <p>Founded Polymarket in 2020 at 22 years old. Now a billionaire. After the 2022 CFTC fine, he moved the platform to Panama and kept building. Two weeks before the 2024 presidential election, the FBI took his phone. He was never charged. The platform he built now processes hundreds of millions of dollars in bets on US government actions, elections, and military strikes every month. He does not do interviews. There are almost no photographs of him.</p>
+</div>
+
+<div class="villain-card">
+  <div class="card-name">Michael Selig</div>
+  <div class="card-role">Acting Chair, CFTC &nbsp;·&nbsp; Former Crypto Industry Attorney</div>
+  <p>Came from Wilkie Farr, a law firm whose clients included major crypto companies. Filed 50 amicus briefs against state attorneys general on behalf of prediction market platforms. Reduced enforcement from 58 cases in 2024 to 13 in 2025. Built an advisory committee to study prediction market concerns and staffed it with prediction market industry representatives. When asked directly about Donald Trump Jr.'s financial stake in Kalshi and Polymarket, he acknowledged he knew about it and declined to act. One of the people I interviewed called it "the police policing themselves." That person used to work inside the agency.</p>
+</div>
+
+<div class="villain-card">
+  <div class="card-name">Donald Trump Jr.</div>
+  <div class="card-role">Financial Stake in Kalshi and Polymarket</div>
+  <p>Has a financial stake in both platforms. His spokesperson says he does not invest directly in the companies but will profit. The recusal arrangement related to CFTC oversight of those companies expires mid-2026. The current acting CFTC chair is a former attorney for those same companies.</p>
+</div>
+
+<div class="villain-card">
+  <div class="card-name">Peter Thiel and Founders Fund</div>
+  <div class="card-role">Early Investor &nbsp;·&nbsp; Silicon Valley to Panama Pipeline</div>
+  <p>Polymarket received early investment from Founders Fund, Peter Thiel's venture capital firm. Thiel is a documented deregulation advocate and a major Trump political donor. The investment connects Polymarket's offshore infrastructure to the same network of relationships that shaped the current CFTC leadership.</p>
+  <div class="verify">Verify: Founders Fund investment in Polymarket is reported but not yet confirmed from primary sources. Do not include in public materials until documented.</div>
+</div>
+
+
+<hr>
+
+
+<h2>Four More Things</h2>
+
+<p><strong style="font-family:'Oswald',sans-serif;letter-spacing:0.04em;font-size:0.95rem;">Selling positions.</strong> You do not have to wait for an event to happen to profit. If you know a US strike is coming, you buy a "yes" position when the odds are 10% and the price is cheap. As insiders and bots move the market, the price of your position rises. You sell at 60% before the strike happens and pocket the gain. The event never has to occur. This is how insider trading works in equity markets, applied to military operations.</p>
+
+<p><strong style="font-family:'Oswald',sans-serif;letter-spacing:0.04em;font-size:0.95rem;">Market manipulation.</strong> The price on Polymarket is set purely by bettors, not by any external model. One large bet moves the price. That movement triggers bots that move it further. This is by design. The theory is that money on the line produces accurate information. The problem is that it also makes the market trivially easy to manipulate. You do not need to know the outcome. You need capital and no conscience.</p>
+
+<p><strong style="font-family:'Oswald',sans-serif;letter-spacing:0.04em;font-size:0.95rem;">Are people incentivizing outcomes? Can those outcomes kill people?</strong> The Van Dyke indictment does not allege he manufactured the Maduro operation. He knew about it and bet on it. But the market structure creates a financial incentive to make specific events happen. At sufficient scale, with sufficient access to the right levers, that is not a theoretical concern. DARPA identified it in 2003 and killed its own program because of it. Nobody killed Polymarket. The experts I have spoken to believe the scenario is possible. None of them will say it has happened yet. None of them will rule it out.</p>
+
+<p><strong style="font-family:'Oswald',sans-serif;letter-spacing:0.04em;font-size:0.95rem;">Who decides what you can bet on?</strong> The platform does. Before 2000, the CFTC required pre-approval of every new derivatives contract. The Commodity Futures Modernization Act eliminated that and replaced it with self certification: platforms declare that their own contracts meet legal standards. Kalshi listed a contract on the death of Iran's Supreme Leader. It was removed after the fact. There is no process that says no before a market goes live.</p>
+
+
+<div class="clock">
+  <div class="clock-label">Ticking Clock</div>
+  <div class="clock-date">December 7, 2026</div>
+  <div class="clock-desc">USA v. Van Dyke &nbsp;·&nbsp; Wire Fraud &nbsp;·&nbsp; SDNY<br>First criminal prediction market insider trading trial in US history</div>
+</div>
+
+<div class="foot">ALL IN: Betting on America &nbsp;·&nbsp; VEFILM &nbsp;·&nbsp; Pedro Feria Pino, SOC &nbsp;·&nbsp; July 2026 &nbsp;·&nbsp; Work in progress</div>
+
+</body>
+</html>
