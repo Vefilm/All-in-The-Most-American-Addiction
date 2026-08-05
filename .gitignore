@@ -9,3 +9,6 @@ files/
 *.zip
 *.pptx
 *.docx
+
+# Private working memory (do not publish)
+*.local.md
