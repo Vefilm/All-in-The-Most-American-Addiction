@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALL IN: Betting on America</title>
+<style>
+:root{
+  --black:#0A0A0A; --ink:#111; --red:#B11226; --red-deep:#7A0C1C;
+  --white:#fff; --cream:#F7F4EE; --card-bg:#141414; --border:rgba(255,255,255,0.07);
+  --amber:#E8A04A; --gold:#C9A84C; --blue-cool:#4A90D9;
+  --text-dim:rgba(255,255,255,0.55); --text-mid:rgba(255,255,255,0.78);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+
+.grain{position:fixed;inset:0;z-index:2000;pointer-events:none;opacity:0.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grainShift 0.6s steps(2) infinite;}
+@keyframes grainShift{0%{transform:translate(0,0)}100%{transform:translate(-6px,4px)}}
+.edge-vig{position:fixed;inset:0;z-index:1999;pointer-events:none;box-shadow:inset 0 0 220px 40px rgba(0,0,0,0.85);}
+
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.topbar-in{max-width:1200px;margin:0 auto;padding:0.8rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:Georgia,serif;font-size:1rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;}
+.logo span{color:var(--red);}
+.topbar-tag{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-dim);}
+
+.js .reveal{opacity:0;transform:translateY(26px);transition:opacity 0.9s cubic-bezier(.2,.7,.2,1),transform 0.9s cubic-bezier(.2,.7,.2,1);}
+.js .reveal.in{opacity:1;transform:none;}
+.js .reveal.d1{transition-delay:0.08s;} .js .reveal.d2{transition-delay:0.16s;}
+.js .reveal.d3{transition-delay:0.24s;} .js .reveal.d4{transition-delay:0.32s;} .js .reveal.d5{transition-delay:0.40s;}
+
+.hero{position:relative;height:100vh;min-height:620px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;padding-bottom:6vh;}
+.hero-bg{position:absolute;inset:0;background:url('../betting-on-america/hangar_bet_hero.jpg') center 45%/cover no-repeat;filter:brightness(0.5) saturate(0.82);transform:scale(1.06);animation:heroDrift 26s ease-in-out infinite alternate;}
+@keyframes heroDrift{from{transform:scale(1.06) translateY(0)}to{transform:scale(1.14) translateY(-14px)}}
+.hero-vig{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,0.42) 0%,rgba(10,10,10,0.16) 40%,rgba(10,10,10,0.99) 100%);}
+.hero-scan{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.hero-scan::after{content:'';position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(177,18,38,0.4),rgba(177,18,38,0.85),rgba(177,18,38,0.4),transparent);animation:scan 8s ease-in-out infinite;box-shadow:0 0 20px rgba(177,18,38,0.4);}
+@keyframes scan{0%{top:0;opacity:0;}6%{opacity:1;}94%{opacity:1;}100%{top:100%;opacity:0;}}
+.hero-content{position:relative;z-index:3;max-width:960px;text-align:center;padding:0 2rem;}
+.hero-eyebrow{font-size:0.72rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--red);margin-bottom:1.4rem;opacity:0;animation:fadeUp 1s ease 0.2s forwards;}
+.hero-title{font-family:Georgia,serif;font-size:clamp(4rem,13vw,9rem);font-weight:700;line-height:0.86;letter-spacing:-0.02em;opacity:0;animation:fadeUp 1.1s ease 0.36s forwards;}
+.hero-sub2{font-family:Georgia,serif;font-style:italic;font-weight:400;font-size:clamp(1.5rem,3.6vw,2.6rem);color:var(--cream);margin-top:0.5rem;opacity:0;animation:fadeUp 1.1s ease 0.52s forwards;}
+.hero-logline{font-size:clamp(1.02rem,2vw,1.3rem);color:var(--text-mid);max-width:660px;margin:1.7rem auto 2rem;line-height:1.5;opacity:0;animation:fadeUp 1.1s ease 0.7s forwards;}
+.hero-tag{display:inline-block;border:1px solid rgba(177,18,38,0.5);color:var(--red);font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;padding:0.45rem 1rem;border-radius:2px;background:rgba(177,18,38,0.08);opacity:0;animation:fadeUp 1.1s ease 0.86s forwards;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+.section{max-width:1160px;margin:0 auto;padding:6.5rem 2rem;position:relative;z-index:3;}
+.eyebrow{font-size:0.66rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;display:block;}
+.section-title{font-family:Georgia,serif;font-size:clamp(2rem,4.4vw,3.2rem);font-weight:700;line-height:1.06;margin-bottom:1.3rem;}
+.section-lead{font-size:1.14rem;color:var(--text-mid);max-width:720px;line-height:1.75;}
+.section-lead.wide{max-width:840px;}
+
+.cold-open{background:#070707;border:1px solid rgba(177,18,38,0.25);border-radius:4px;overflow:hidden;margin:0 0 2.5rem;box-shadow:0 24px 60px rgba(0,0,0,0.5);}
+.cold-open-label{background:var(--red);font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;padding:0.45rem 1.25rem;display:inline-block;}
+.cold-open-text{padding:2.2rem 2.6rem;font-family:Georgia,serif;font-size:clamp(1.3rem,2.5vw,1.72rem);line-height:1.5;font-style:italic;}
+.cold-open-text strong{color:var(--red);font-style:normal;}
+.cold-open-credit{padding:0 2.6rem 1.9rem;font-size:0.8rem;letter-spacing:0.04em;color:var(--text-dim);}
+
+.stat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;margin:0;}
+.stat-card{background:var(--card-bg);border:1px solid var(--border);border-radius:4px;padding:1.6rem 0.85rem;text-align:center;transition:border-color .22s,transform .22s,box-shadow .22s;}
+.stat-card:hover{border-color:rgba(177,18,38,0.5);transform:translateY(-4px);box-shadow:0 0 28px rgba(177,18,38,0.12);}
+.stat-num{font-family:Georgia,serif;font-size:2rem;font-weight:700;color:var(--red);display:block;line-height:1;}
+.stat-label{font-size:0.64rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-dim);margin-top:0.7rem;display:block;line-height:1.4;}
+
+.tell{margin:2.8rem 0 0;max-width:860px;}
+.tellrow{margin-bottom:1.8rem;}
+.tell-label{font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-mid);margin-bottom:0.6rem;}
+.tell-track{position:relative;height:56px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:3px;overflow:hidden;}
+.tell-fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:0 3px 3px 0;transition:width 1.6s cubic-bezier(.2,.7,.2,1);display:flex;align-items:center;justify-content:flex-end;}
+.tell-fill.red{background:linear-gradient(90deg,var(--red-deep),var(--red));box-shadow:0 0 30px rgba(177,18,38,0.4);}
+.tell-fill.grey{background:linear-gradient(90deg,#2a2a2a,#3d3d3d);}
+.tell-val{font-family:Georgia,serif;font-size:1.5rem;font-weight:700;padding:0 1rem;color:#fff;white-space:nowrap;}
+.tell-note{font-size:0.9rem;color:var(--text-dim);font-style:italic;margin-top:0.4rem;}
+
+.band{position:relative;min-height:86vh;display:flex;align-items:center;overflow:hidden;}
+.band-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.42) saturate(0.82);}
+.band-vig{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,0.96) 0%,rgba(10,10,10,0.72) 45%,rgba(10,10,10,0.3) 100%);}
+.band-in{position:relative;z-index:3;max-width:1160px;margin:0 auto;padding:5.5rem 2rem;width:100%;}
+.band-in .section-lead{color:var(--cream);}
+
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0.6rem;margin:2.6rem 0 1rem;}
+.flow-step{background:rgba(20,20,20,0.9);border:1px solid var(--border);border-radius:4px;padding:1.2rem 1rem;}
+.flow-step.cap{background:#1a0608;border-color:rgba(177,18,38,0.4);}
+.flow-step.loop{border-color:rgba(177,18,38,0.5);}
+.flow-n{font-family:Georgia,serif;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:0.5rem;}
+.flow-t{font-weight:700;font-size:0.92rem;margin-bottom:0.3rem;line-height:1.2;}
+.flow-d{font-size:0.74rem;color:var(--text-dim);line-height:1.45;}
+.flow-arrow{text-align:center;color:var(--red);font-size:0.8rem;margin:0.4rem 0 0.2rem;letter-spacing:0.3em;animation:loopPulse 2.6s ease-in-out infinite;}
+@keyframes loopPulse{0%,100%{opacity:0.4}50%{opacity:1}}
+
+/* statement + owners */
+.stmt{background:linear-gradient(135deg,#1a0608 0%,#0c0c0c 100%);border:1px solid rgba(177,18,38,0.3);border-left:4px solid var(--red);border-radius:4px;padding:2rem 2.2rem;margin:2.4rem 0;}
+.stmt-big{font-family:Georgia,serif;font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700;line-height:1.25;margin-bottom:0.8rem;}
+.stmt p{font-size:0.98rem;color:var(--text-mid);line-height:1.7;max-width:760px;}
+.pullq{border-left:3px solid var(--red);padding:1.4rem 1.8rem;background:var(--card-bg);border-radius:0 4px 4px 0;margin:2.2rem 0;}
+.pullq p{font-family:Georgia,serif;font-size:1.28rem;line-height:1.5;font-style:italic;color:#fff;}
+.pullq cite{display:block;margin-top:0.7rem;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);font-style:normal;}
+
+/* comparison table */
+.ptable{width:100%;border-collapse:collapse;margin:2.4rem 0 0;font-size:0.92rem;overflow:hidden;border-radius:6px;border:1px solid var(--border);}
+.ptable th{font-family:'Helvetica Neue',Arial,sans-serif;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;padding:0.9rem 1rem;text-align:left;background:#111;color:var(--text-dim);border-bottom:1px solid var(--border);}
+.ptable th.usa{color:#fff;background:#1a0608;}
+.ptable td{padding:0.95rem 1rem;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-mid);line-height:1.5;}
+.ptable td.role{color:var(--text-dim);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;width:22%;}
+.ptable td.usa{color:#fff;background:rgba(177,18,38,0.06);}
+.ptable tr:last-child td{border-bottom:none;}
+
+.thesis{border-left:4px solid var(--red);padding:1.6rem 2rem;margin:2.4rem 0 0;background:rgba(177,18,38,0.05);}
+.thesis p{font-family:Georgia,serif;font-size:clamp(1.4rem,2.8vw,1.9rem);line-height:1.4;font-style:italic;color:#fff;}
+.thesis small{display:block;margin-top:1rem;font-family:system-ui,sans-serif;font-style:normal;font-size:0.86rem;color:var(--text-dim);line-height:1.6;}
+
+.mapwrap{background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:2rem 1.5rem 1.2rem;margin:2.6rem 0 0;box-shadow:0 24px 60px rgba(0,0,0,0.45);}
+.mapcap{font-size:0.8rem;color:var(--text-dim);text-align:center;margin:0.8rem auto 0;max-width:720px;line-height:1.55;}
+.mapsection::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 58% 48% at 50% 52%, rgba(177,18,38,0.14), transparent 70%),radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);background-size:auto, 26px 26px;}
+.mapline{stroke-dasharray:260;stroke-dashoffset:260;}
+.js .mapwrap.in .mapline{animation:draw 1.1s ease forwards;}
+.js .mapwrap.in .mapline.l2{animation-delay:0.18s;} .js .mapwrap.in .mapline.l3{animation-delay:0.36s;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+.mapcore{transform-origin:420px 215px;}
+.js .mapwrap.in .mapcore{animation:corePulse 3s ease-in-out infinite;}
+@keyframes corePulse{0%,100%{opacity:0.85}50%{opacity:1;filter:drop-shadow(0 0 10px rgba(177,18,38,0.7))}}
+.js .mapwrap.in .citydot{animation:cityPulse 2.4s ease-in-out infinite;}
+@keyframes cityPulse{0%,100%{r:7}50%{r:9}}
+
+.character-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.4rem;margin:2.6rem 0 0;}
+.char-card{background:var(--card-bg);border:1px solid var(--border);border-radius:4px;padding:1.75rem;transition:border-color .25s,transform .25s,box-shadow .25s;}
+.char-card:hover{border-color:rgba(177,18,38,0.45);transform:translateY(-3px);box-shadow:0 0 28px rgba(177,18,38,0.1);}
+.char-card.warm{border-left:3px solid var(--amber);}
+.char-role{font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:0.5rem;}
+.char-card.warm .char-role{color:var(--amber);}
+.char-name{font-family:Georgia,serif;font-size:1.4rem;font-weight:700;line-height:1.2;margin-bottom:0.2rem;}
+.char-subtitle{font-size:0.74rem;color:var(--text-dim);margin-bottom:1.1rem;}
+.char-hook{font-family:Georgia,serif;font-style:italic;font-size:1.02rem;line-height:1.55;color:var(--cream);margin-bottom:1rem;}
+.char-fact{font-size:0.84rem;color:var(--text-mid);line-height:1.55;padding-top:1rem;border-top:1px solid var(--border);display:flex;gap:0.5rem;}
+.char-fact::before{content:'\2192';color:var(--red);flex-shrink:0;}
+
+/* the look */
+.look-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin:2.6rem 0 0;}
+.look-card{background:#0e0e12;border:1px solid var(--border);border-radius:4px;padding:1.75rem;}
+.look-media{height:200px;background-size:cover;background-position:center;border-radius:4px 4px 0 0;margin:-1.75rem -1.75rem 1.3rem;filter:saturate(0.9) brightness(0.94);}
+.look-k{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.7rem;}
+.look-k.red{color:var(--red);} .look-k.amber{color:var(--amber);}
+.look-h{font-weight:700;font-size:1.02rem;color:#fff;margin-bottom:0.55rem;}
+.look-d{font-size:0.86rem;color:var(--text-dim);line-height:1.7;}
+
+/* structure parts */
+.parts{display:grid;grid-template-columns:repeat(4,1fr);gap:0.9rem;margin:2.6rem 0 0;}
+.part{background:rgba(20,20,20,0.9);border:1px solid var(--border);border-top:3px solid var(--red);border-radius:0 0 4px 4px;padding:1.3rem 1.1rem;}
+.part-n{font-family:Georgia,serif;font-size:1.3rem;color:rgba(177,18,38,0.7);}
+.part-t{font-weight:700;font-size:0.98rem;color:#fff;margin:0.3rem 0 0.3rem;}
+.part-d{font-size:0.76rem;color:var(--text-dim);line-height:1.5;}
+
+.clock-band .band-vig{background:linear-gradient(180deg,rgba(10,10,10,0.5) 0%,rgba(10,10,10,0.55) 40%,rgba(10,10,10,0.95) 100%);}
+.clock-kicker{font-size:0.7rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;}
+.clock-date{font-family:Georgia,serif;font-size:clamp(3rem,8vw,6rem);font-weight:700;color:var(--white);line-height:0.95;}
+.clock-date span{color:var(--red);}
+.clock-count{font-family:Georgia,serif;font-size:1.4rem;color:var(--amber);margin-top:0.6rem;}
+.clock-body{font-size:1.14rem;color:var(--cream);max-width:660px;line-height:1.7;margin-top:1.4rem;}
+.clock-body b{color:#fff;}
+
+.closing{text-align:center;padding:7.5rem 2rem 8.5rem;max-width:880px;margin:0 auto;position:relative;z-index:3;}
+.closing p.big{font-family:Georgia,serif;font-size:clamp(1.7rem,3.8vw,2.5rem);font-style:italic;line-height:1.4;color:var(--white);}
+.closing p.big strong{color:var(--red);font-style:normal;}
+.closing-meta{margin-top:2.4rem;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-dim);}
+
+.divider{border:none;border-top:1px solid var(--border);max-width:1160px;margin:0 auto;}
+.footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;font-size:0.68rem;letter-spacing:0.06em;color:var(--text-dim);position:relative;z-index:3;}
+
+@media(max-width:960px){.stat-row{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:860px){.flow{grid-template-columns:1fr 1fr;}.parts{grid-template-columns:1fr 1fr;}.look-grid{grid-template-columns:1fr;}.section{padding:4.5rem 1.4rem;}}
+@media(max-width:520px){.flow{grid-template-columns:1fr;}.ptable td.role{width:auto;}.stat-row{grid-template-columns:repeat(2,1fr);}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}.js .reveal{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="edge-vig"></div>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="logo">ALL <span>IN</span></div>
+    <div class="topbar-tag">Betting on America &middot; A Feature Documentary</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-vig"></div>
+  <div class="hero-scan"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">A Feature Documentary</p>
+    <h1 class="hero-title">ALL IN</h1>
+    <p class="hero-sub2">Betting on America</p>
+    <p class="hero-logline">The most American addiction there is, and the corruption hiding inside it, all the way up to the family at the top.</p>
+    <span class="hero-tag">In Development &middot; VEFILM</span>
+  </div>
+</header>
+
+<!-- COLD OPEN -->
+<section class="section">
+  <div class="cold-open reveal">
+    <span class="cold-open-label">The Cold Open</span>
+    <div class="cold-open-text">November 5, 2024. The presidential election is called, the largest single day in prediction market history. Eight days later, the FBI seizes the phone of Polymarket's CEO. Then the new administration takes office, the case is quietly dropped, <strong>no charges, no explanation,</strong> and a month later the president's son's fund invests in the platform.</div>
+    <div class="cold-open-credit">The CEO was never touched. This is where the film begins.</div>
+  </div>
+  <p class="section-lead wide reveal d1">It looks like harmless fun, a bet on an election or a game. Follow the money and it becomes something else. The platforms are offshore by design. The agency that is supposed to police them has been turned into an instrument that protects them. And the people who cracked this are spread across Paris, Washington and New York, each holding one piece. The film enters through the most American thing there is, the bet, and lands on the family at the top.</p>
+</section>
+
+<hr class="divider">
+
+<!-- STATS -->
+<section class="section">
+  <span class="eyebrow reveal">The Scale</span>
+  <h2 class="section-title reveal d1">A quiet industry, hiding in plain sight.</h2>
+  <div class="stat-row">
+    <div class="stat-card reveal d1"><span class="stat-num" data-pre="$" data-to="20" data-suf="B+">$20B+</span><span class="stat-label">Wagered on Polymarket, up from $15B in the spring</span></div>
+    <div class="stat-card reveal d2"><span class="stat-num">96 &rarr; 13</span><span class="stat-label">CFTC enforcement actions, FY2023 to FY2025</span></div>
+    <div class="stat-card reveal d3"><span class="stat-num" data-pre="$" data-to="2.4" data-dec="1" data-suf="M">$2.4M</span><span class="stat-label">Won by nine coordinated wallets at a 98% clip, betting on US military outcomes</span></div>
+    <div class="stat-card reveal d4"><span class="stat-num" data-pre="$" data-to="2.18" data-dec="2" data-suf="B">$2.18B</span><span class="stat-label">In oil shorts placed minutes before White House announcements, flagged, no charges</span></div>
+    <div class="stat-card reveal d5"><span class="stat-num" data-pre="$" data-to="36" data-suf="B">$36B</span><span class="stat-label">New York's suit against Kalshi. The CFTC went to court to stop New York</span></div>
+    <div class="stat-card reveal d5"><span class="stat-num">20 &rarr; 0</span><span class="stat-label">Trial lawyers left in the CFTC's Chicago enforcement division</span></div>
+  </div>
+</section>
+
+<!-- THE TELL -->
+<section class="section">
+  <span class="eyebrow reveal">The Tell</span>
+  <h2 class="section-title reveal d1">The number that turns a hunch into a case.</h2>
+  <p class="section-lead reveal d2">Researchers went through every settled military contract on Polymarket. Longshot bets on military outcomes win far more often than longshots anywhere else. A gap that wide is not luck, and it is not skill.</p>
+  <div class="tell reveal d2">
+    <div class="tellrow">
+      <div class="tell-label">Longshot military bets</div>
+      <div class="tell-track"><div class="tell-fill red" data-w="51.8"><span class="tell-val">51.8%</span></div></div>
+    </div>
+    <div class="tellrow">
+      <div class="tell-label">Every other market</div>
+      <div class="tell-track"><div class="tell-fill grey" data-w="14"><span class="tell-val">14%</span></div></div>
+    </div>
+    <p class="tell-note">Someone knew. The blockchain shows exactly when.</p>
+  </div>
+</section>
+
+<!-- THE MACHINE -->
+<section class="band">
+  <div class="band-bg" style="background-image:url('../betting-on-america/gen_hollow_regulator.jpg');"></div>
+  <div class="band-vig"></div>
+  <div class="band-in">
+    <span class="eyebrow reveal">How The Machine Works</span>
+    <h2 class="section-title reveal d1">Follow the money and the game turns into a system.</h2>
+    <p class="section-lead reveal d2">The addiction is the way in. The corruption is what is waiting at the bottom. The same loop runs again and again, and nobody with the power to stop it wants to.</p>
+    <div class="flow reveal d2">
+      <div class="flow-step"><div class="flow-n">01</div><div class="flow-t">The bet</div><div class="flow-d">The American door in. Elections, games, anything.</div></div>
+      <div class="flow-step"><div class="flow-n">02</div><div class="flow-t">The platforms</div><div class="flow-d">Polymarket and Kalshi, offshore, chasing billions.</div></div>
+      <div class="flow-step"><div class="flow-n">03</div><div class="flow-t">Inside info wins</div><div class="flow-d">Bets on wars, strikes and the deaths of foreign leaders.</div></div>
+      <div class="flow-step cap"><div class="flow-n">04</div><div class="flow-t">The regulator</div><div class="flow-d">The CFTC, captured. Enforcement gutted, the CEOs on its council.</div></div>
+      <div class="flow-step loop"><div class="flow-n">05</div><div class="flow-t">The loophole</div><div class="flow-d">A rule sold as a ban, written to keep the sensitive bets legal.</div></div>
+    </div>
+    <div class="flow-arrow reveal d3">&larr;&nbsp;&nbsp;and it runs again&nbsp;&nbsp;&larr;</div>
+  </div>
+</section>
+
+<!-- THE OWNERS -->
+<section class="band">
+  <div class="band-bg" style="background-image:url('../betting-on-america/05_the_owners.jpg');"></div>
+  <div class="band-vig"></div>
+  <div class="band-in">
+    <span class="eyebrow reveal">The Owners</span>
+    <h2 class="section-title reveal d1">You do not have to place a bet to win.<br>You have to own the house.</h2>
+    <p class="section-lead reveal d2">This is the part everyone tiptoes around. These markets are not just tolerated at the top. They are wired into it.</p>
+    <div class="stmt reveal d2">
+      <div class="stmt-big">Donald Trump Jr. holds equity. He does not need to place a single insider bet.</div>
+      <p>Insider activity creates volume. Volume creates value. Value accrues to whoever owns the platform. No bet, no crime, entirely legal under the law as it stands. The family's crypto venture, World Liberty Financial, is tied in, and Truth Predict, a prediction market built into the MAGA media ecosystem, points the same audience at the same machine. This is the version no individual prosecution can reach, which is why blanket bans matter more than one soldier's trial.</p>
+    </div>
+    <div class="pullq reveal d2">
+      <p>On traders who hold inside information: "having an edge to the market is a good thing."</p>
+      <cite>Shayne Coplan, Polymarket CEO &middot; 60 Minutes, 2026</cite>
+    </div>
+    <div class="stmt reveal d2">
+      <div class="stmt-big">And the referee now plays for one team. Not regulatory capture. Regulatory deployment.</div>
+      <p>Under Chairman Michael Selig, the CFTC has filed briefs and lawsuits siding with the platforms against the states, and when New York sued Kalshi as illegal gambling, the agency went to court to stop New York. It has gutted its own enforcement, from 96 actions in 2023 to 13 in 2025, and let the Chicago enforcement division fall from twenty trial lawyers to zero. Selig disbanded the technology advisory committee and replaced it with a council of thirty five executives drawn from the very industry he regulates. The Federal Trade Commission, Wall Street money, and the platforms all pull the same direction. The house and the referee are now the same people.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SAME STRUCTURE -->
+<section class="band">
+  <div class="band-bg" style="background-image:url('../betting-on-america/gen_congo_flag_v2.jpg');"></div>
+  <div class="band-vig"></div>
+  <div class="band-in">
+    <span class="eyebrow reveal">Same Structure, Different Suit</span>
+    <h2 class="section-title reveal d1">This has happened before. In the Congo.</h2>
+    <p class="section-lead reveal d2">In 2021 a coalition of nineteen outlets published the Congo Hold Up, the largest financial leak in African history, showing how a president's family drained a country through a bank they controlled while the central bank looked away. The team that co authored it, ACDC, found the same shape operating inside the United States. Michael Hornsby puts it in four words. Same structure, different suit.</p>
+  </div>
+</section>
+<section class="section" style="padding-top:3.5rem;">
+  <table class="ptable reveal d2">
+    <thead><tr><th></th><th>Congo Hold Up &middot; DRC, 2016 to 2021</th><th class="usa">Polymarket &middot; USA, 2024 to 2026</th></tr></thead>
+    <tbody>
+      <tr><td class="role">The head of state</td><td>The president</td><td class="usa">Donald Trump</td></tr>
+      <tr><td class="role">The family insider</td><td>His family</td><td class="usa">Donald Trump Jr.</td></tr>
+      <tr><td class="role">The captured institution</td><td>BGFIBank, and a central bank that looked away</td><td class="usa">The CFTC under Michael Selig</td></tr>
+      <tr><td class="role">The anonymous vehicle</td><td>Shell companies</td><td class="usa">Anonymous wallets, and World Liberty Financial</td></tr>
+      <tr><td class="role">Who exposed it</td><td>PPLAAF and Mediapart</td><td class="usa">ACDC, the same investigators</td></tr>
+    </tbody>
+  </table>
+  <div class="stmt reveal d2" style="margin-top:2.2rem;">
+    <div class="stmt-big">It is the same setup in both countries.</div>
+    <p>A regulator that looks the other way. Anonymous accounts that move the money out of sight. And it ends up with the family at the top. In the Congo it was shell companies and a bank the family controlled. Here it is anonymous wallets, a captured CFTC, and the family's own crypto fund. The bet on the phone is where the money goes in. The family at the top is where it comes out.</p>
+  </div>
+</section>
+
+<!-- DARPA -->
+<section class="band">
+  <div class="band-bg" style="background-image:url('../betting-on-america/13_darpa_killed_it.jpg');"></div>
+  <div class="band-vig"></div>
+  <div class="band-in">
+    <span class="eyebrow reveal">The Precedent</span>
+    <h2 class="section-title reveal d1">The government already killed this once.</h2>
+    <p class="section-lead reveal d2">In 2003 the Pentagon built a market that let people bet on assassinations and terror attacks, the Policy Analysis Market. Congress killed it in a day, called it grotesque, and shut it down. Twenty three years later the same idea is a private business worth tens of billions, and the government that once killed it now protects it.</p>
+    <div class="thesis reveal d2">
+      <p>A market that pays you for knowing what is about to happen becomes a market that pays you for making it happen. When the people who can move troops, ships and missiles can also hold the winning position, the incentive no longer points toward peace.</p>
+      <small>We are not claiming a bet pulled a trigger. We are showing that the structure now rewards anyone who can. That is the line Congress drew in 2003, and it is open again.</small>
+    </div>
+  </div>
+</section>
+
+<!-- THE MAP -->
+<section class="section mapsection">
+  <span class="eyebrow reveal">The Map</span>
+  <h2 class="section-title reveal d1">This is not only a Washington story. It runs across borders.</h2>
+  <p class="section-lead wide reveal d2">The market itself is offshore, the money moves everywhere, and the investigators who cracked it are sitting in different cities on different continents, each holding one piece. The Congo is where this exact method was born, before the same tools were ever turned on Polymarket.</p>
+  <div class="mapwrap reveal d2">
+    <svg viewBox="0 0 840 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Investigation map">
+      <defs>
+        <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#B11226"/></marker>
+      </defs>
+      <g stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="2 5" fill="none">
+        <line x1="420" y1="215" x2="120" y2="360"/><line x1="420" y1="215" x2="290" y2="392"/>
+        <line x1="420" y1="215" x2="420" y2="400"/><line x1="420" y1="215" x2="552" y2="392"/>
+        <line x1="420" y1="215" x2="720" y2="360"/>
+      </g>
+      <g stroke="#B11226" stroke-width="1.6" fill="none">
+        <line class="mapline l1" x1="176" y1="118" x2="372" y2="192" marker-end="url(#ah)"/>
+        <line class="mapline l2" x1="420" y1="86" x2="420" y2="176" marker-end="url(#ah)"/>
+        <line class="mapline l3" x1="664" y1="118" x2="468" y2="192" marker-end="url(#ah)"/>
+      </g>
+      <g class="mapcore">
+        <circle cx="420" cy="215" r="47" fill="#1a0608" stroke="#B11226" stroke-width="1.4"/>
+        <text x="420" y="209" text-anchor="middle" fill="#fff" font-family="Georgia,serif" font-size="13" font-weight="700">THE</text>
+        <text x="420" y="226" text-anchor="middle" fill="#fff" font-family="Georgia,serif" font-size="13" font-weight="700">MACHINE</text>
+      </g>
+      <text x="420" y="275" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif" font-size="10" letter-spacing="1">offshore &middot; unregulated &middot; global</text>
+      <g font-family="system-ui,sans-serif" text-anchor="middle">
+        <circle class="citydot" cx="176" cy="104" r="7" fill="#B11226"/>
+        <text x="176" y="82" font-size="15" font-weight="700" fill="#fff" font-family="Georgia,serif">PARIS</text>
+        <text x="176" y="132" font-size="11.5" fill="rgba(255,255,255,0.7)">Hornsby &middot; Deebs</text>
+        <circle class="citydot" cx="420" cy="72" r="7" fill="#B11226"/>
+        <text x="420" y="50" font-size="15" font-weight="700" fill="#fff" font-family="Georgia,serif">WASHINGTON</text>
+        <text x="420" y="34" font-size="11" fill="rgba(255,255,255,0.7)">Szakonyi &middot; Kendler Kretsch &middot; Luong</text>
+        <circle class="citydot" cx="664" cy="104" r="7" fill="#B11226"/>
+        <text x="664" y="82" font-size="15" font-weight="700" fill="#fff" font-family="Georgia,serif">NEW YORK</text>
+        <text x="664" y="132" font-size="11.5" fill="rgba(255,255,255,0.7)">Kovel</text>
+      </g>
+      <text x="420" y="332" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10.5" font-weight="700" letter-spacing="3" fill="rgba(255,255,255,0.45)">THE TRAIL REACHES</text>
+      <g font-family="system-ui,sans-serif" text-anchor="middle" font-size="12" font-weight="600" fill="rgba(255,255,255,0.6)">
+        <circle cx="120" cy="360" r="4" fill="rgba(255,255,255,0.35)"/><text x="120" y="382">Congo</text>
+        <circle cx="290" cy="392" r="4" fill="rgba(255,255,255,0.35)"/><text x="290" y="414">Ireland</text>
+        <circle cx="420" cy="400" r="4" fill="rgba(255,255,255,0.35)"/><text x="420" y="422">Romania</text>
+        <circle cx="552" cy="392" r="4" fill="rgba(255,255,255,0.35)"/><text x="552" y="414">Russia</text>
+        <circle cx="720" cy="360" r="4" fill="rgba(255,255,255,0.35)"/><text x="720" y="382">Iran</text>
+      </g>
+    </svg>
+    <p class="mapcap">Three field cities where the investigators are, converging on one machine. The trail runs out to the Congo bank scandal that started this method, and to the wars and leaders these markets are quietly betting on.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- THE CAST -->
+<section class="section">
+  <span class="eyebrow reveal">The Cast</span>
+  <h2 class="section-title reveal d1">Six investigators, one machine.</h2>
+  <p class="section-lead wide reveal d2">Each of them found the same thing from a different corner, and none of them are clean heroes, which is what makes them worth following. Every person here is talking, on camera.</p>
+  <div class="character-grid">
+    <div class="char-card reveal d1">
+      <div class="char-role">Paris &middot; The Veteran</div>
+      <div class="char-name">Michael Hornsby</div>
+      <div class="char-subtitle">Anti Corruption Data Collective</div>
+      <p class="char-hook">The veteran who has watched this movie before, in another country, and knows how it ends when nobody stops it.</p>
+      <p class="char-fact">Helped crack the Congo Hold Up, then ran the same method on Polymarket. He was my first door into this network, and opened the rest. His line: insider information is not a bug on these platforms, it is the feature.</p>
+    </div>
+    <div class="char-card reveal d2">
+      <div class="char-role">New York &middot; The Insider</div>
+      <div class="char-name">David Kovel</div>
+      <div class="char-subtitle">Kirby McInerney</div>
+      <p class="char-hook">The insider who knows what a rigged chart feels like before anyone runs the numbers.</p>
+      <p class="char-fact">A commodities trader before he was a lawyer, and the winner of the largest CFTC whistleblower award in history. He named the mechanism on 60 Minutes, and he is building the civil case to take it to court himself.</p>
+    </div>
+    <div class="char-card reveal d3">
+      <div class="char-role">Washington &middot; The Data</div>
+      <div class="char-name">David Szakonyi</div>
+      <div class="char-subtitle">George Washington University &middot; ACDC</div>
+      <p class="char-hook">The scientist who set out to analyze a dataset, and the dataset handed him a crime.</p>
+      <p class="char-fact">His team found military longshots win about 51.8 percent of the time against roughly 14 percent everywhere else. He says these markets are closer to a Ponzi than a fair bet, and the honest fix is to get rid of them.</p>
+    </div>
+    <div class="char-card reveal d1">
+      <div class="char-role">Washington &middot; The Detective</div>
+      <div class="char-name">Michelle Kendler Kretsch</div>
+      <div class="char-subtitle">ACDC &middot; Lead Data Investigator</div>
+      <p class="char-hook">Blunt and funny and the most watchable of the group. She will tell you the world is on fire and the White House is just chilling, then explain exactly why that should scare you.</p>
+      <p class="char-fact">Up at four in the morning with her one year old the night the US struck Iran, watching the money move before the news broke. Before ACDC she tracked literal warlords at The Sentry, the unit George Clooney cofounded.</p>
+    </div>
+    <div class="char-card reveal d2">
+      <div class="char-role">Washington &middot; The Hill</div>
+      <div class="char-name">Janice Luong</div>
+      <div class="char-subtitle">Project On Government Oversight</div>
+      <p class="char-hook">The one inside Washington who knows the difference between real legislation and a press release.</p>
+      <p class="char-fact">Careful, and will not say more than she can prove. She wrote the questions nobody in government would answer, and tracked the account that made more than half a million dollars betting on the death of Iran's supreme leader.</p>
+    </div>
+    <div class="char-card warm reveal d3">
+      <div class="char-role">Paris &middot; The Ghost</div>
+      <div class="char-name">Deebs</div>
+      <div class="char-subtitle">Bubblemaps &middot; Anonymous, ex military</div>
+      <p class="char-hook">The most cinematic of the group. No real name, a wall of screens, a cursor tracing wallet paths in real time.</p>
+      <p class="char-fact">His team found nine coordinated anonymous accounts that won about 98 percent of their bets on US military outcomes, roughly 2.4 million dollars, sitting on a public blockchain for anyone to see.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE LOOK -->
+<section class="section">
+  <span class="eyebrow reveal">The Look</span>
+  <h2 class="section-title reveal d1">How we shoot it.</h2>
+  <p class="section-lead reveal d2">Two textures, cut against each other. The phone, shot close and warm, the way the addiction actually feels. And the rooms where the real money moves, shot wide and cold. The archive gets the same care, the 2003 hearings, the Congo files, the 60 Minutes tape, treated as image, not as evidence.</p>
+  <div class="look-grid reveal d2">
+    <div class="look-card">
+      <div class="look-media" style="background-image:url('../betting-on-america/gen_scene_phone.jpg');"></div>
+      <div class="look-k red">The Phone</div>
+      <div class="look-h">Close. Warm. Handheld.</div>
+      <div class="look-d">The app's glow, the swipe, the number climbing. Shot at the scale of an addiction, because that is where the money comes in. The phone is the antagonist.</div>
+    </div>
+    <div class="look-card">
+      <div class="look-media" style="background-image:url('../betting-on-america/27_selig_alone.jpg');"></div>
+      <div class="look-k amber">The Rooms</div>
+      <div class="look-d" style="margin-bottom:0;"><span class="look-h" style="display:block;">Wide. Cold. Still.</span>Empty marble, long corridors, one figure at a long table. Power shot at a distance that makes a person feel small. This is where the addiction on the phone turns into someone else's fortune.</div>
+    </div>
+  </div>
+</section>
+
+<!-- STRUCTURE -->
+<section class="band">
+  <div class="band-bg" style="background-image:url('../betting-on-america/gen_interview_set.jpg');"></div>
+  <div class="band-vig"></div>
+  <div class="band-in">
+    <span class="eyebrow reveal">The Structure</span>
+    <h2 class="section-title reveal d1">Four movements, converging on one thing.</h2>
+    <p class="section-lead reveal d2">It is not one team in one room, and that is the truth of the story. ACDC is the thread, Bubblemaps supplies the forensics, POGO carries it into Congress, Kovel carries it into the courts. The film is the story of them converging, the way All the President's Men is really the story of two reporters and the sources who kept pointing them at the same thing.</p>
+    <div class="parts reveal d2">
+      <div class="part"><div class="part-n">I</div><div class="part-t">The Addiction</div><div class="part-d">The bet, the phone, the human way in.</div></div>
+      <div class="part"><div class="part-n">II</div><div class="part-t">The Machine</div><div class="part-d">The wallets, the data, the tell.</div></div>
+      <div class="part"><div class="part-n">III</div><div class="part-t">The Owners</div><div class="part-d">The family, the platforms, the captured referee.</div></div>
+      <div class="part"><div class="part-n">IV</div><div class="part-t">The Reckoning</div><div class="part-d">The trial, the courts, the window closing.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE CLOCK -->
+<section class="band clock-band">
+  <div class="band-bg" style="background-image:url('../betting-on-america/18_door_deadline.jpg');"></div>
+  <div class="band-vig"></div>
+  <div class="band-in">
+    <p class="clock-kicker reveal">The Clock</p>
+    <div class="clock-date reveal d1">December <span>7</span></div>
+    <div class="clock-count reveal d1" id="daysout">&nbsp;</div>
+    <p class="clock-body reveal d2">Gannon Van Dyke, an Army Master Sergeant, goes on federal trial for placing bets tied to a real world military operation. He is the small figure holding the bag while the machine keeps running above him. <b>The trial date can slip. The regulatory window cannot.</b> In twelve to eighteen months, new commissioners normalize what Selig built and it becomes settled precedent. That is why this film has to be made now.</p>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <p class="big reveal">The cleanup everyone assumes is happening is a rule sold as a ban, with the escape hatch written in. Same structure, different suit. <strong>The regulation is the story, not the end of it.</strong></p>
+  <p class="closing-meta reveal d1">ALL IN: Betting on America &middot; VEFILM / Pedro Feria Pino</p>
+</section>
+
+<div class="footer">ALL IN: Betting on America &middot; VEFILM &middot; Confidential &middot; Figures drawn from ACDC reports, court filings, legislative records, and on record interviews</div>
+
+<script>
+document.body.classList.add('js');
+document.addEventListener('DOMContentLoaded',function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:0.14, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  function countUp(el){
+    var to=parseFloat(el.getAttribute('data-to')), dec=parseInt(el.getAttribute('data-dec')||'0',10);
+    var pre=el.getAttribute('data-pre')||'', suf=el.getAttribute('data-suf')||'';
+    if(reduce){ el.textContent=pre+to.toFixed(dec)+suf; return; }
+    var start=null,dur=1400;
+    function step(ts){ if(!start)start=ts; var p=Math.min((ts-start)/dur,1); var e=1-Math.pow(1-p,3);
+      el.textContent=pre+(to*e).toFixed(dec)+suf; if(p<1)requestAnimationFrame(step); else el.textContent=pre+to.toFixed(dec)+suf; }
+    requestAnimationFrame(step);
+  }
+  var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);so.unobserve(e.target);}});},{threshold:0.6});
+  document.querySelectorAll('.stat-num[data-to]').forEach(function(el){ so.observe(el); });
+
+  var to2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('.tell-fill').forEach(function(f){f.style.width=f.getAttribute('data-w')+'%';});to2.unobserve(e.target);}});},{threshold:0.4});
+  document.querySelectorAll('.tell').forEach(function(el){ to2.observe(el); });
+
+  var el=document.getElementById('daysout');
+  if(el){ var t=new Date(2026,11,7), n=new Date(), d=Math.ceil((t-n)/86400000);
+    el.textContent = d>0 ? d+' days out' : (d===0?'Today':'In session'); }
+});
+</script>
+</body>
+</html>
